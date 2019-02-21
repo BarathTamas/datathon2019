@@ -103,12 +103,12 @@ ui <- dashboardPage(
                                  selected = sec_counc_count$country[1],
                                  selectize = TRUE),
                      
-                     sliderInput(inputId = "year",
-                                 label = "Select Year:",
-                                 min = 1970,
-                                 max = 2015,
-                                 value = 2015,
-                                 step = 1),
+                     # sliderInput(inputId = "year",
+                     #             label = "Select Year:",
+                     #             min = 1970,
+                     #             max = 2015,
+                     #             value = 2015,
+                     #             step = 1),
                      
                      sliderInput(inputId = "maxWordsCloud",
                                  label = "Select Number of Words in Cloud:",
@@ -362,7 +362,7 @@ server <- function(input, output) {
   
   output$testInfo2 <- renderValueBox({
     valueBox(
-      subtitle = paste0("Mentioned ", input$country," the most positively in ", input$plot2_click$year), 
+      subtitle = paste0("Mentioned ", input$country," the most positively in ", floor(input$plot2_click$x)),  #error before first click 
       value = "Der Gerät schläft nie ein", 
       icon = icon("thumbs-up", lib = "glyphicon"),
       color = "blue"
@@ -421,7 +421,7 @@ server <- function(input, output) {
 
   sec_counc_words_R2 <- reactive({sec_counc_words %>%
       filter(country == input$country) %>%
-      filter(year == input$year)
+      filter(year == floor(input$plot2_click$x))
   })
 
   output$wordcloud <- renderPlot({
