@@ -251,7 +251,7 @@ ui <- dashboardPage(
                     width = 6,
                     solidHeader = TRUE,
                     
-                    withSpinner(plotOutput("linePlot"))
+                    withSpinner(plotOutput("linePlot", click = "plot2_click"))
                     
                 ),
                 
@@ -351,7 +351,7 @@ server <- function(input, output) {
   
   output$testInfo1 <- renderValueBox({
     valueBox(
-      subtitle = "Sentiment Index", 
+      subtitle = "is the Sentiment Index", 
       value = "Der Gerät wird nie müde", 
       icon = icon("thumbs-up", lib = "glyphicon"),
       color = "navy"
@@ -362,7 +362,7 @@ server <- function(input, output) {
   
   output$testInfo2 <- renderValueBox({
     valueBox(
-      subtitle = "Mentiod the most positively by:", 
+      subtitle = paste0("Mentioned ", input$country," the most positively in ", input$plot2_click$year), 
       value = "Der Gerät schläft nie ein", 
       icon = icon("thumbs-up", lib = "glyphicon"),
       color = "blue"
@@ -373,14 +373,14 @@ server <- function(input, output) {
   
   output$testInfo3 <- renderValueBox({
     valueBox(
-      subtitle = "Mentiod the most negatively by:", 
+      subtitle = paste0("Mentioned ",  input$country," the most negatively"), 
       value = "und ist immer vor chef in geschäft", 
       icon = icon("thumbs-down", lib = "glyphicon"),
       color = "light-blue"
     )
   })
   
-  # line plot
+  #### line plot ####
   
   sec_counc_count_R <- reactive({sec_counc_count %>% 
       filter(country == input$country)
@@ -417,7 +417,7 @@ server <- function(input, output) {
   #           panel.grid.minor.y = element_blank())
   # })
   
-  # wordcloud
+  #### wordcloud #####
 
   sec_counc_words_R2 <- reactive({sec_counc_words %>%
       filter(country == input$country) %>%
@@ -426,11 +426,12 @@ server <- function(input, output) {
 
   output$wordcloud <- renderPlot({
     
-    ggplot(sec_counc_words_R2(), aes(label = word, size = freqword)) +
-      geom_text_wordcloud()
+    ggplot(sec_counc_words_R2(), aes(label = word, 
+                                     size = freqword)) +
+      geom_text_wordcloud_area(shape = "diamond") +
+      scale_size_area(max_size = input$maxWordsCloud) +
+      theme_minimal()
     
-    # wordcloud(wordFrame$word, wordFrame$freqword,
-    #           max.words = input$maxWordsCloud)
   })
 
 }
