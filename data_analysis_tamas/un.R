@@ -96,28 +96,7 @@ write.table(top_slopes["word"],"shiny app/trending words.csv",row.names=F)
 write.table(word_corr,"shiny app/word_correlations.csv")
 
 
-#who used the words the most in a given year?
-keyword="financial"
-keydate=as.POSIXct("1998-09-15")
-result <- text_df %>%
-  filter(word==keyword) %>%
-  filter(date==keydate) %>% 
-  count(country)
 
-keycountries=result %>%
-  top_n(4) %>% 
-  select(country) %>% 
-  mutate_at(1, as.character)
-
-#extracting sentences of interest with the keyword
-text_df2 <-text_df_raw %>%
-  unnest_tokens(sentence, text, token="sentences") %>%  #tokenize into sentences
-  filter(nchar(sentence)>10)  #remove errors
-
-keytext <- text_df2 %>% 
-  filter(date==keydate) %>% 
-  filter(country %in% keycountries$country) %>%
-  filter(grepl(keyword,sentence))
 
 ####session info------------------
 
@@ -132,8 +111,42 @@ session_info=tibble(
 write.table(session_info, "shiny app/session_info.csv")
 
 
+####word users--------------
 
+#who used the words the most in a given year?
+keyword="financial"
+keydate=as.POSIXct("1998-09-15")
 
+date_country_word <- text_df %>%
+  mutate(word = str_extract(word, "[a-z']+")) %>%
+  na.omit() %>%
+  anti_join(stop_words) %>% #remove functional words
+  count(date,country,word) %>%
+  ungroup() %>%
+  ungroup() %>%
+  filter(word %in% as.matrix(top_slopes["word"]))
+
+#save the dataframe for the webapp
+write.table(date_country_word,"shiny app/date_country_word.csv")
+
+result <- date_country_word %>%
+  filter(word==keyword) %>%
+  filter(date==keydate) %>% 
+  count(country)
+
+keycountries=result %>%
+  top_n(5) %>% 
+  mutate_at(1, as.character)
+
+#extracting sentences of interest with the keyword
+text_df2 <-text_df_raw %>%
+  unnest_tokens(sentence, text, token="sentences") %>%  #tokenize into sentences
+  filter(nchar(sentence)>10)  #remove errors
+
+keytext <- text_df2 %>% 
+  filter(date==keydate) %>% 
+  filter(country %in% keycountries$country) %>%
+  filter(grepl(keyword,sentence))
 
 
 
