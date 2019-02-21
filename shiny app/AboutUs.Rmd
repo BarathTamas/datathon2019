@@ -1,0 +1,17 @@
+---
+title: "AboutUs"
+author: "Blazej Herbert Makosa"
+date: "20/02/2019"
+output: html_document
+runtime: shiny
+---
+
+## Strike Force p<0.05
+### About us
+
+We are all in the first year of the Master of Statistics. The team consists of: Tamas Barath, Atsuki Kojima, Blazej Makosa, Nico Schwemmle, Pascal Wiltschko.
+
+This is our submission for the 2019 Datathon competition at KU Leuven.
+
+
+
