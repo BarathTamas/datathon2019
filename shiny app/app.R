@@ -33,6 +33,8 @@ word_corrs <- read.table("word_correlations.csv", header = TRUE, stringsAsFactor
 
 session_info <- read.table("session_info.csv", header = TRUE, stringsAsFactors = FALSE)
 
+date_country_word <- read.table("date_country_word.csv", header = TRUE, stringsAsFactors = FALSE)
+
 # ui ------------------------------------------------------------------------------------------
 
 ui <- dashboardPage(
@@ -180,7 +182,7 @@ ui <- dashboardPage(
               
               fluidRow(
                 
-                box(title = "Information Table",
+                box(title = "Session Information",
                     status = "info",
                     width = 7,
                     solidHeader = TRUE,
@@ -189,13 +191,13 @@ ui <- dashboardPage(
                     
                 ),
                 
-                box(title = "Text",
+                box(title = "WHich countries used it most?",
                     status = "info",
                     width = 5,
-                    solidHeader = TRUE
-                    
-                    # dataTableOutput("click_info")
-                    
+                    solidHeader = TRUE,
+
+                    withSpinner(dataTableOutput("click_info2"))
+
                 )
                 
               )
@@ -302,6 +304,17 @@ server <- function(input, output) {
       filter(date==as.POSIXct(nearPoints(filteredWords(), input$plot1_click)[1,"date"]))
     
   }, options = list(searching = FALSE, paging = FALSE))
+  
+  output$click_info2 <- renderDataTable({
+    
+    date_country_word %>%
+      filter(date==as.POSIXct(nearPoints(filteredWords(), input$plot1_click)[1,"date"])) %>% 
+      filter(word==nearPoints(filteredWords(), input$plot1_click)[1,"word"]) %>% 
+      top_n(5) %>%
+      select(country,n)
+    
+    
+  }, options = list(searching = FALSE, paging = FALSE))  
   
   #### rendered objects DB 2 ####
   
