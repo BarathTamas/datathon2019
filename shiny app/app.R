@@ -8,7 +8,6 @@ library(shinydashboard)
 library(shinythemes)
 # library(shinytest)
 library(DT)
-library(wordcloud)
 # library(ggiraph)
 # library(shinyjqui)
 library(shinyWidgets)
@@ -115,8 +114,6 @@ ui <- dashboardPage(
                                value = 10,
                                min = 3,
                                max = 20,
-                               width = "130px",
-                               height = "130px",
                                displayPrevious = TRUE, 
                                lineCap = "round",
                                fgColor = "#428BCA",
@@ -381,7 +378,7 @@ server <- function(input, output) {
   output$testInfo3 <- renderValueBox({
     valueBox(
       subtitle = paste0("Mentioned ",  input$country," the most negatively"), 
-      value = "und ist immer vor chef in geschäft", 
+      value = "und ist immer vor chef in geschäft",
       icon = icon("thumbs-down", lib = "glyphicon"),
       color = "light-blue"
     )
