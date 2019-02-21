@@ -115,6 +115,8 @@ ui <- dashboardPage(
                                value = 10,
                                min = 3,
                                max = 20,
+                               width = "130px",
+                               height = "130px",
                                displayPrevious = TRUE, 
                                lineCap = "round",
                                fgColor = "#428BCA",
@@ -357,7 +359,7 @@ server <- function(input, output) {
     valueBox(
       subtitle = "is the Sentiment Index", 
       value = "Der Gerät wird nie müde", 
-      icon = icon("thumbs-up", lib = "glyphicon"),
+      icon = icon("heartbeat", lib = "font-awesome"),
       color = "navy"
     )
   })
@@ -366,7 +368,8 @@ server <- function(input, output) {
   
   output$testInfo2 <- renderValueBox({
     valueBox(
-      subtitle = paste0("Mentioned ", input$country," the most positively in ", floor(input$plot2_click$x)),  #error before first click 
+      subtitle = paste0("Mentioned ", input$country," the most positively in "),
+                        # floor(input$plot2_click$x)),  #error before first click 
       value = "Der Gerät schläft nie ein", 
       icon = icon("thumbs-up", lib = "glyphicon"),
       color = "blue"
