@@ -373,7 +373,12 @@ server <- function(input, output) {
   
   output$linePlot <- renderPlot({
     ggplot(data = sec_counc_count_R(), aes(year, count)) + 
-      geom_line()
+      geom_line() +
+      xlab("Year") +
+      ylab("Count") +
+      theme_bw() +
+      theme(legend.position = "bottom",
+            panel.grid.minor.y = element_blank())
   })
   
   # barplot
@@ -389,7 +394,12 @@ server <- function(input, output) {
   output$barPlot <- renderPlot({
     ggplot(data = sec_counc_words_R1(), aes(word, tf)) +
       geom_col(show.legend = FALSE) +
-      coord_flip()
+      coord_flip() +
+      xlab("Count") +
+      ylab("Word") +
+      theme_bw() +
+      theme(legend.position = "bottom",
+            panel.grid.minor.y = element_blank())
   })
   
   # # wordcloud
