@@ -34,9 +34,13 @@ trending_words <- read.table("trending words.csv", header = TRUE, stringsAsFacto
 
 word_corrs <- read.table("word_correlations.csv", header = TRUE, stringsAsFactors = FALSE)
 
-session_info <- read.table("session_info.csv", header = TRUE, stringsAsFactors = FALSE)
+session_info <- as.data.frame(data.table::fread("session_info.csv"))
 
-date_country_word <- read.table("date_country_word.csv", header = TRUE, stringsAsFactors = FALSE)
+date_country_word <- as.data.frame(data.table::fread("date_country_word.csv"))
+
+# session_info <- read.table("session_info.csv", header = TRUE, stringsAsFactors = FALSE)
+# 
+# date_country_word <- read.table("date_country_word.csv", header = TRUE, stringsAsFactors = FALSE)
 
 # dashboard 2
 
@@ -341,10 +345,11 @@ server <- function(input, output) {
   output$click_info2 <- renderDataTable({
     
     date_country_word %>%
-      filter(date==as.POSIXct(nearPoints(filteredWords(), input$plot1_click)[1,"date"])) %>% 
-      filter(word==nearPoints(filteredWords(), input$plot1_click)[1,"word"]) %>% 
+      filter(date == as.POSIXct(nearPoints(filteredWords(), input$plot1_click)[1,"date"])) %>% 
+      filter(word == nearPoints(filteredWords(), input$plot1_click)[1,"word"]) %>% 
       top_n(5) %>%
-      select(country,n)
+      select(country,n) %>% 
+      arrange(desc(n))
     
     
   }, options = list(searching = FALSE, paging = FALSE))  
@@ -367,7 +372,7 @@ server <- function(input, output) {
   output$testInfo2 <- renderValueBox({
     valueBox(
       subtitle = paste0("Mentioned ", input$country," the most positively in ", input$year), 
-      value = "Der Gerät schläft nie ein", 
+      value = "Der Gerät schläft nie ein",
       icon = icon("thumbs-up", lib = "glyphicon"),
       color = "blue"
     )
