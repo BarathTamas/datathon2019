@@ -103,13 +103,13 @@ ui <- dashboardPage(
                                  selected = sec_counc_count$country[1],
                                  selectize = TRUE),
                      
-                      sliderInput(inputId = "year",
-                                  label = "Select Year:",
-                                  min = 1970,
-                                  max = 2015,
-                                  value = 2015,
-                                  step = 1,
-                                  sep = ""),
+                     sliderInput(inputId = "year",
+                                 label = "Select Year:",
+                                 min = 1970,
+                                 max = 2015,
+                                 value = 2015,
+                                 step = 1,
+                                 sep = ""),
                      
                      knobInput(inputId = "maxWordsCloud",
                                label = "Select Number of Words in Cloud:",
@@ -193,7 +193,7 @@ ui <- dashboardPage(
               
               fluidRow(
                 
-                box(title = "Correlation Heatmap",
+                box(title = "Heatmap Displaying Word Correlations",
                     status = "info",
                     width = 5,
                     height = "550px",
@@ -204,7 +204,7 @@ ui <- dashboardPage(
                     
                 ),
                 
-                box(title = "Words over Time",
+                box(title = "Frequency of Selected Words Over Time (click to receive information)",
                     status = "info",
                     width = 7,
                     height = "550px",
@@ -216,7 +216,7 @@ ui <- dashboardPage(
               
               fluidRow(
                 
-                box(title = "Session Information",
+                box(title = "Information about selected session",
                     status = "info",
                     width = 7,
                     solidHeader = TRUE,
@@ -225,7 +225,7 @@ ui <- dashboardPage(
                     
                 ),
                 
-                box(title = "Which countries used it most?",
+                box(title = "Frequency by Country",
                     status = "info",
                     width = 5,
                     solidHeader = TRUE,
@@ -378,8 +378,8 @@ server <- function(input, output) {
   
   output$testInfo3 <- renderValueBox({
     valueBox(
-      subtitle = paste0("Mentioned ",  input$country," the most negatively in ", input$year), 
-      value = "und ist immer vor chef in geschäft", 
+      subtitle = paste0("Mentioned ",  input$country," the most negatively"), 
+      value = "und ist immer vor chef in geschäft",
       icon = icon("thumbs-down", lib = "glyphicon"),
       color = "light-blue"
     )
@@ -425,20 +425,25 @@ server <- function(input, output) {
   #### wordcloud #####
   
   sec_counc_words_R2 <- reactive({sec_counc_words %>%
-      filter(country == input$country) %>%
-      filter(year == floor(input$year))
+      mutate(angle = 45 * sample(-2:2, n(), replace = TRUE, prob = c(1, 1, 4, 1, 1))) %>% 
+      filter(country == input$country, year == floor(input$year)) %>%
+      top_n(n = input$maxWordsCloud, wt = freqword)
   })
   
   output$wordcloud <- renderPlot({
     
     ggplot(sec_counc_words_R2(), aes(label = word, 
-                                     size = freqword)) +
-      geom_text_wordcloud_area(shape = "diamond") +
-      scale_size_area(max_size = input$maxWordsCloud) +
+                                     size = freqword,
+                                     color = freqword,
+                                     angle = angle,
+                                     replace = TRUE),
+           rm_outside = TRUE) +
+      scale_color_gradient(low = "darkred", high = "darkblue") +
+      scale_size_area(max_size = 20) +
+      geom_text_wordcloud(shape = "circle") +
       theme_minimal()
     
   })
-  
 }
 
 # app -----------------------------------------------------------------------------------------
