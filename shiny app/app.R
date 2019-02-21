@@ -95,7 +95,11 @@ ui <- dashboardPage(
                          maxOptions = 10
                        ),
                        multiple = TRUE
-                     )
+                     ),
+                     
+                     actionButton(
+                       "update", "Update View"
+                    )
     ),
     
     #### sliders DB 2 ####
@@ -221,18 +225,20 @@ ui <- dashboardPage(
               
               fluidRow(
                 
-                box(title = "Information about selected session",
+                box(title = "Information About Selected Session",
                     status = "info",
                     width = 7,
                     solidHeader = TRUE,
                     
                     withSpinner(dataTableOutput("click_info"))
                     
-                ),
-                
-                box(title = "Frequency by Country",
+                )
+              ),  
+              fluidRow(
+                  
+                box(title = "Frequency by Country (Top Users)",
                     status = "info",
-                    width = 5,
+                    width = 7,
                     solidHeader = TRUE,
                     
                     withSpinner(dataTableOutput("click_info2"))
@@ -350,8 +356,10 @@ server <- function(input, output) {
       filter(date == as.POSIXct(nearPoints(filteredWords(), input$plot1_click)[1,"date"])) %>% 
       filter(word == nearPoints(filteredWords(), input$plot1_click)[1,"word"]) %>% 
       top_n(5) %>%
-      select(country,n) %>% 
-      arrange(desc(n))
+      arrange(desc(n)) %>% 
+      mutate(country=fullname,frequency=n) %>% 
+      select(country,frequency)
+      
     
     
   }, options = list(searching = FALSE, paging = FALSE))  
