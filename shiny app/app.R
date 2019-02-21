@@ -31,8 +31,11 @@ trending_words <- read.table("trending words.csv", header = TRUE, stringsAsFacto
 
 word_corrs <- read.table("word_correlations.csv", header = TRUE, stringsAsFactors = FALSE)
 
+<<<<<<< HEAD
 session_info <- read.table("session_info.csv", header = TRUE, stringsAsFactors = FALSE)
 
+=======
+>>>>>>> c7f3d9634426ab583c7dfdd6be7998e0ab174e4b
 # ui ------------------------------------------------------------------------------------------
 
 ui <- dashboardPage(
