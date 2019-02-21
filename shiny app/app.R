@@ -34,13 +34,13 @@ trending_words <- read.table("trending words.csv", header = TRUE, stringsAsFacto
 
 word_corrs <- read.table("word_correlations.csv", header = TRUE, stringsAsFactors = FALSE)
 
-session_info <- as.data.frame(data.table::fread("session_info.csv"))
-
-date_country_word <- as.data.frame(data.table::fread("date_country_word.csv"))
-
-# session_info <- read.table("session_info.csv", header = TRUE, stringsAsFactors = FALSE)
+# session_info <- as.data.frame(data.table::fread("session_info.csv"))
 # 
-# date_country_word <- read.table("date_country_word.csv", header = TRUE, stringsAsFactors = FALSE)
+# date_country_word <- as.data.frame(data.table::fread("date_country_word.csv"))
+
+session_info <- read.table("session_info.csv", header = TRUE, stringsAsFactors = FALSE)
+
+date_country_word <- read.table("date_country_word.csv", header = TRUE, stringsAsFactors = FALSE)
 
 # dashboard 2
 
@@ -48,6 +48,7 @@ sec_counc_count <- read.csv("securitycouncil_count.csv", header = TRUE, stringsA
 
 sec_counc_words <- read.csv("securitycouncil_words.csv", header = TRUE, stringsAsFactors = FALSE)
 
+sentiment_data <- read.csv("china_sentiment_wrong.csv", header = TRUE, stringsAsFactors = FALSE)
 
 # ui ------------------------------------------------------------------------------------------
 
@@ -359,10 +360,19 @@ server <- function(input, output) {
   
   # sentiment index
   
+  # sentimentScore <- reactive({
+  #   
+  #   sentiment_data %>%
+  #     filter(year == input$year & country == input$country) %>% 
+  #     select(proportionsentiment) %>% 
+  #     mutate(proportionsentiment = round(proportionsentiment, 2))
+  #     
+  # })
+  
   output$testInfo1 <- renderValueBox({
     valueBox(
       subtitle = paste0("is the Sentiment Index in ", input$year), 
-      value = "Der Gerät wird nie müde", 
+      value = "WIP",
       icon = icon("heartbeat", lib = "font-awesome"),
       color = "navy"
     )
@@ -370,10 +380,19 @@ server <- function(input, output) {
   
   # mentiod the most positively by
   
+  sentimentPercPos <- reactive({
+    
+    sentiment_data %>%
+      filter(year == input$year & country == input$country & sentiment == "positive") %>% 
+      select(proportionsentiment) %>% 
+      mutate(proportionsentiment = round(proportionsentiment, 2))
+    
+  })
+  
   output$testInfo2 <- renderValueBox({
     valueBox(
       subtitle = paste0("Mentioned ", input$country," the most positively in ", input$year), 
-      value = "Der Gerät schläft nie ein",
+      value = paste0(sentimentPercPos()*100, "%"),
       icon = icon("thumbs-up", lib = "glyphicon"),
       color = "blue"
     )
@@ -381,10 +400,19 @@ server <- function(input, output) {
   
   # mentiod the most negatively by
   
+  sentimentPercNeg <- reactive({
+    
+    sentiment_data %>%
+      filter(year == input$year & country == input$country & sentiment == "negative") %>% 
+      select(proportionsentiment) %>% 
+      mutate(proportionsentiment = round(proportionsentiment, 2))
+    
+  })
+  
   output$testInfo3 <- renderValueBox({
     valueBox(
       subtitle = paste0("Mentioned ",  input$country," the most negatively"), 
-      value = "und ist immer vor chef in geschäft",
+      value = paste0(sentimentPercNeg()*100, "%"),
       icon = icon("thumbs-down", lib = "glyphicon"),
       color = "light-blue"
     )
