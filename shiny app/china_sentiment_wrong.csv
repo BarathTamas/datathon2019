@@ -1,0 +1,93 @@
+year,country,sentiment,proportionsentiment,othercountries
+1970,China,negative,0.5274725274725275,Albania
+1970,China,positive,0.4725274725274725,Albania
+1971,China,negative,0.419672131147541,Albania
+1971,China,positive,0.580327868852459,Albania
+1972,China,negative,0.45151515151515154,Albania
+1972,China,positive,0.5484848484848485,Albania
+1973,China,negative,0.37844036697247707,Albania
+1973,China,positive,0.6215596330275229,Albania
+1974,China,negative,0.4796380090497738,Belarus
+1974,China,positive,0.5203619909502263,Albania
+1975,China,negative,0.476027397260274,Albania
+1975,China,positive,0.523972602739726,Albania
+1976,China,negative,0.3758169934640523,Albania
+1976,China,positive,0.6241830065359477,Zambia
+1977,China,negative,0.34375,Algeria Cambodia Lesotho Russia Thailand
+1977,China,positive,0.65625,Laos
+1978,China,negative,0.6198347107438017,Cuba
+1978,China,positive,0.38016528925619836,Burundi
+1979,China,negative,0.5666666666666667,Albania
+1979,China,positive,0.43333333333333335,Vietnam
+1980,China,negative,0.6994047619047619,Vietnam
+1980,China,positive,0.3005952380952381,Vietnam
+1981,China,negative,0.554140127388535,Vietnam
+1981,China,positive,0.445859872611465,Vietnam
+1982,China,negative,0.575,Vietnam
+1982,China,positive,0.425,Laos
+1983,China,negative,0.5137254901960784,Vietnam
+1983,China,positive,0.48627450980392156,Vietnam
+1984,China,negative,0.5323383084577115,Vietnam
+1984,China,positive,0.46766169154228854,Laos
+1985,China,negative,0.39325842696629215,Vietnam
+1985,China,positive,0.6067415730337079,Malta
+1986,China,negative,0.4230769230769231,Thailand
+1986,China,positive,0.5769230769230769,Vietnam
+1987,China,negative,0.27058823529411763,Cambodia
+1987,China,positive,0.7294117647058823,Vietnam
+1988,China,negative,0.3,Madagascar
+1988,China,positive,0.7,Madagascar
+1989,China,negative,0.4117647058823529,UK
+1989,China,positive,0.5882352941176471,UK
+1990,China,negative,0.25,Vietnam
+1990,China,positive,0.75,Japan Vietnam
+1991,China,negative,0.17857142857142858,Cameroon Vietnam
+1991,China,positive,0.8214285714285714,North Korea
+1992,China,negative,0.25,Philippines
+1992,China,positive,0.75,Vietnam
+1993,China,negative,0.24444444444444444,Iran Malawi USA
+1993,China,positive,0.7555555555555555,Solomon Islands
+1994,China,negative,0.22340425531914893,Central African Republic
+1994,China,positive,0.776595744680851,Solomon Islands
+1995,China,negative,0.27350427350427353,Solomon Islands
+1995,China,positive,0.7264957264957265,Liberia
+1996,China,negative,0.24817518248175183,Dominica Grenada Palau
+1996,China,positive,0.7518248175182481,Grenada
+1997,China,negative,0.205607476635514,Liberia
+1997,China,positive,0.794392523364486,Nicaragua
+1998,China,negative,0.27522935779816515,Brunei Darussalam Nicaragua Samoa
+1998,China,positive,0.7247706422018348,Swaziland
+1999,China,negative,0.2823529411764706,Gambia El Salvador
+1999,China,positive,0.7176470588235294,Grenada
+2000,China,negative,0.272,Dominica
+2000,China,positive,0.728,Gambia
+2001,China,negative,0.3240223463687151,Palau Tuvalu
+2001,China,positive,0.6759776536312849,Swaziland
+2002,China,negative,0.3047619047619048,Saint Kitts and Nevis
+2002,China,positive,0.6952380952380952,Liberia
+2003,China,negative,0.3125,Dominica Tuvalu
+2003,China,positive,0.6875,Dominica Morocco Paraguay
+2004,China,negative,0.256,Tuvalu
+2004,China,positive,0.744,Central African Republic
+2005,China,negative,0.3595505617977528,Maldives Singapore
+2005,China,positive,0.6404494382022472,Saint Vincent and the Grenadines
+2006,China,negative,0.2976190476190476,UK Saint Vincent and the Grenadines
+2006,China,positive,0.7023809523809523,UK
+2007,China,negative,0.3283582089552239,Solomon Islands
+2007,China,positive,0.6716417910447762,Solomon Islands
+2008,China,negative,0.24528301886792453,Singapore
+2008,China,positive,0.7547169811320755,Singapore
+2009,China,negative,0.2753623188405797,Sudan Tanzania
+2009,China,positive,0.7246376811594203,Marshall Islands Solomon Islands
+2010,China,negative,0.38961038961038963,Niger
+2010,China,positive,0.6103896103896104,Saint Lucia Yemen
+2011,China,negative,0.2909090909090909,Canada
+2011,China,positive,0.7090909090909091,Russia
+2012,China,negative,0.19444444444444445,Cuba Indonesia
+2012,China,positive,0.8055555555555556,Tuvalu
+2013,China,negative,0.10869565217391304,Papua New Guinea
+2013,China,positive,0.8913043478260869,Saint Kitts and Nevis
+2014,China,negative,0.24806201550387597,Philippines
+2014,China,positive,0.751937984496124,Saint Kitts and Nevis
+2015,China,negative,0.19626168224299065,USA
+2015,China,positive,0.8037383177570093,Philippines
