@@ -7,14 +7,14 @@ library(shiny)
 library(shinydashboard)
 library(shinythemes)
 # library(shinytest)
-# library(DT)
-# library(wordcloud)
+library(DT)
+library(wordcloud)
 # library(ggiraph)
 # library(shinyjqui)
 library(shinyWidgets)
 library(shinycssloaders)
 # library(colourpicker)
-library(formattable)
+# library(formattable)
 library(Cairo)
 library(RColorBrewer)
 library(pheatmap)
@@ -25,13 +25,22 @@ options(shiny.usecairo = TRUE)
 
 # input data ----------------------------------------------------------------------------------
 
-words_ts <- read.table("words_ts.csv", header = TRUE, stringsAsFactors = FALSE) %>% mutate(date=as.POSIXct(date)) #date column as POSIXct from the start
+# dashboard 1
+
+words_ts <- read.table("words_ts.csv", header = TRUE, stringsAsFactors = FALSE) %>% 
+  mutate(date = as.POSIXct(date)) #date column as POSIXct from the start
 
 trending_words <- read.table("trending words.csv", header = TRUE, stringsAsFactors = FALSE)
 
 word_corrs <- read.table("word_correlations.csv", header = TRUE, stringsAsFactors = FALSE)
 
 session_info <- read.table("session_info.csv", header = TRUE, stringsAsFactors = FALSE)
+
+# dashboard 2
+
+sec_counc_count <- read.csv("securitycouncil_count.csv", header = TRUE, stringsAsFactors = FALSE)
+
+sec_counc_words <- read.csv("securitycouncil_words.csv", header = TRUE, stringsAsFactors = FALSE)
 
 # ui ------------------------------------------------------------------------------------------
 
@@ -82,9 +91,27 @@ ui <- dashboardPage(
     
     #### sliders DB 2 ####
     
-    conditionalPanel(condition = "input.sidebar=='dashboard2'"
+    conditionalPanel(condition = "input.sidebar=='dashboard2'",
                      
+                     selectInput(inputId = "country",
+                                 label = "Select Country:",
+                                 choices = unique(sec_counc_count$country),
+                                 selected = sec_counc_count$country[1],
+                                 selectize = TRUE),
                      
+                     sliderInput(inputId = "year",
+                                 label = "Select Year:",
+                                 min = 1970,
+                                 max = 2015,
+                                 value = 2015,
+                                 step = 1),
+                     
+                     sliderInput(inputId = "maxWordsCloud",
+                                 label = "Select Number of Words in Cloud:",
+                                 min = 3,
+                                 max = 20,
+                                 value = 10,
+                                 step = 1)
                      
     ),
     
@@ -218,27 +245,27 @@ ui <- dashboardPage(
                 box(title = "Line Plot",
                     status = "info",
                     width = 6,
-                    solidHeader = TRUE
+                    solidHeader = TRUE,
                     
-                    
+                    withSpinner(plotOutput("linePlot"))
                     
                 ),
                 
                 box(title = "Bar Plot",
                     status = "info",
                     width = 3,
-                    solidHeader = TRUE
+                    solidHeader = TRUE,
                     
-                    
+                    withSpinner(plotOutput("barPlot"))
                     
                 ),
                 
                 box(title = "Wordcloud",
                     status = "info",
                     width = 3,
-                    solidHeader = TRUE
+                    solidHeader = TRUE,
                     
-                    
+                    withSpinner(plotOutput("wordcloud"))
                     
                 )
               )
@@ -255,8 +282,8 @@ ui <- dashboardPage(
               
       )
     )
-    )
-    )
+  )
+)
 
 
 # server --------------------------------------------------------------------------------------
@@ -299,11 +326,13 @@ server <- function(input, output) {
   output$click_info <- renderDataTable({
     
     session_info %>%
-      filter(date==as.POSIXct(nearPoints(filteredWords(), input$plot1_click)[1,"date"]))
+      filter(date == as.POSIXct(nearPoints(filteredWords(), input$plot1_click)[1,"date"]))
     
   }, options = list(searching = FALSE, paging = FALSE))
   
   #### rendered objects DB 2 ####
+  
+  # sentiment index
   
   output$testInfo1 <- renderValueBox({
     valueBox(
@@ -314,6 +343,8 @@ server <- function(input, output) {
     )
   })
   
+  # mentiod the most positively by
+  
   output$testInfo2 <- renderValueBox({
     valueBox(
       subtitle = "Mentiod the most positively by:", 
@@ -322,6 +353,8 @@ server <- function(input, output) {
       color = "blue"
     )
   })
+  
+  # mentiod the most negatively by
   
   output$testInfo3 <- renderValueBox({
     valueBox(
@@ -332,6 +365,46 @@ server <- function(input, output) {
     )
   })
   
+  # line plot
+  
+  sec_counc_count_R <- reactive({sec_counc_count %>% 
+      filter(country == input$country)
+  })
+  
+  output$linePlot <- renderPlot({
+    ggplot(data = sec_counc_count_R(), aes(year, count)) + 
+      geom_line()
+  })
+  
+  # barplot
+  
+  sec_counc_words_R1 <- reactive({
+    sec_counc_words %>%
+      filter(country == input$country) %>% 
+      filter(year == input$year) %>%
+      top_n(10, tf) %>%
+      mutate(word = reorder(word, tf))
+  })
+  
+  output$barPlot <- renderPlot({
+    ggplot(data = sec_counc_words_R1(), aes(word, tf)) +
+      geom_col(show.legend = FALSE) +
+      coord_flip()
+  })
+  
+  # # wordcloud
+  # 
+  # sec_counc_words_R2 <- reactive({sec_counc_words %>% 
+  #     filter(country == input$country) %>% 
+  #     filter(year == input$year)
+  # })
+  # 
+  # wordFrame <- sec_counc_words_R2()
+  # output$wordcloud <- renderPlot({
+  #   wordcloud(wordFrame$word, wordFrame$freqword, 
+  #             max.words = input$maxWordsCloud)
+  # })
+
 }
 
 # app -----------------------------------------------------------------------------------------
