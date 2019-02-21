@@ -110,12 +110,16 @@ ui <- dashboardPage(
                                  value = 2015,
                                  step = 1),
                      
-                     sliderInput(inputId = "maxWordsCloud",
-                                 label = "Select Number of Words in Cloud:",
-                                 min = 3,
-                                 max = 20,
-                                 value = 10,
-                                 step = 1)
+                     knobInput(inputId = "maxWordsCloud",
+                               label = "Select Number of Words in Cloud:",
+                               value = 10,
+                               min = 3,
+                               max = 20,
+                               displayPrevious = TRUE, 
+                               lineCap = "round",
+                               fgColor = "#428BCA",
+                               inputColor = "#428BCA"
+                     )
                      
     ),
     
@@ -224,9 +228,9 @@ ui <- dashboardPage(
                     status = "info",
                     width = 5,
                     solidHeader = TRUE,
-
+                    
                     withSpinner(dataTableOutput("click_info2"))
-
+                    
                 )
                 
               )
@@ -251,7 +255,7 @@ ui <- dashboardPage(
                     width = 6,
                     solidHeader = TRUE,
                     
-                    withSpinner(plotOutput("linePlot", click = "plot2_click"))
+                    withSpinner(plotOutput("linePlot", click = "plot2"))
                     
                 ),
                 
@@ -418,12 +422,12 @@ server <- function(input, output) {
   # })
   
   #### wordcloud #####
-
+  
   sec_counc_words_R2 <- reactive({sec_counc_words %>%
       filter(country == input$country) %>%
       filter(year == input$year)
   })
-
+  
   output$wordcloud <- renderPlot({
     
     ggplot(sec_counc_words_R2(), aes(label = word, 
@@ -433,7 +437,7 @@ server <- function(input, output) {
       theme_minimal()
     
   })
-
+  
 }
 
 # app -----------------------------------------------------------------------------------------
