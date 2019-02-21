@@ -117,7 +117,7 @@ write.table(session_info, "shiny app/session_info.csv")
 keyword="financial"
 keydate=as.POSIXct("1998-09-15")
 
-country_codes=read.table("shiny app/country_codes.csv")
+#country_codes=read.table("shiny app/country_codes.csv")
 
 date_country_word <- text_df %>%
   mutate(word = str_extract(word, "[a-z']+")) %>%
@@ -125,8 +125,7 @@ date_country_word <- text_df %>%
   anti_join(stop_words) %>% #remove functional words
   count(date,country,word) %>%
   ungroup() %>%
-  filter(word %in% as.matrix(top_slopes["word"])) %>% 
-  left_join(country_codes)
+  filter(word %in% as.matrix(top_slopes["word"]))
 
 #save the dataframe for the webapp
 write.table(date_country_word,"shiny app/date_country_word.csv")

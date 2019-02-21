@@ -42,6 +42,8 @@ session_info <- read.table("session_info.csv", header = TRUE, stringsAsFactors =
 
 date_country_word <- read.table("date_country_word.csv", header = TRUE, stringsAsFactors = FALSE)
 
+country_codes <- read.table("country_codes.csv", header = TRUE, stringsAsFactors = FALSE)
+
 # dashboard 2
 
 sec_counc_count <- read.csv("securitycouncil_count.csv", header = TRUE, stringsAsFactors = FALSE)
@@ -238,7 +240,7 @@ ui <- dashboardPage(
                   
                 box(title = "Frequency by Country (Top Users)",
                     status = "info",
-                    width = 7,
+                    width = 3,
                     solidHeader = TRUE,
                     
                     withSpinner(dataTableOutput("click_info2"))
@@ -356,6 +358,7 @@ server <- function(input, output) {
       filter(date == as.POSIXct(nearPoints(filteredWords(), input$plot1_click)[1,"date"])) %>% 
       filter(word == nearPoints(filteredWords(), input$plot1_click)[1,"word"]) %>% 
       top_n(5) %>%
+      left_join(country_codes) %>% #despite intuition its faster this way then prejoining 
       arrange(desc(n)) %>% 
       mutate(country=fullname,frequency=n) %>% 
       select(country,frequency)
