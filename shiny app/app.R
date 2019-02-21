@@ -18,6 +18,7 @@ library(shinycssloaders)
 library(Cairo)
 library(RColorBrewer)
 library(pheatmap)
+library(ggwordcloud)
 
 # shiny dashboard -----------------------------------------------------------------------------
 
@@ -41,6 +42,8 @@ date_country_word <- read.table("date_country_word.csv", header = TRUE, stringsA
 # dashboard 2
 
 sec_counc_count <- read.csv("securitycouncil_count.csv", header = TRUE, stringsAsFactors = FALSE)
+
+sec_counc_words <- read.csv("securitycouncil_words.csv", header = TRUE, stringsAsFactors = FALSE)
 
 
 # ui ------------------------------------------------------------------------------------------
@@ -217,7 +220,7 @@ ui <- dashboardPage(
                     
                 ),
                 
-                box(title = "WHich countries used it most?",
+                box(title = "Which countries used it most?",
                     status = "info",
                     width = 5,
                     solidHeader = TRUE,
@@ -252,18 +255,18 @@ ui <- dashboardPage(
                     
                 ),
                 
-                box(title = "Bar Plot",
-                    status = "info",
-                    width = 3,
-                    solidHeader = TRUE,
-                    
-                    withSpinner(plotOutput("barPlot"))
-                    
-                ),
+                # box(title = "Bar Plot",
+                #     status = "info",
+                #     width = 3,
+                #     solidHeader = TRUE,
+                #     
+                #     withSpinner(plotOutput("barPlot"))
+                #     
+                # ),
                 
                 box(title = "Wordcloud",
                     status = "info",
-                    width = 3,
+                    width = 6,
                     solidHeader = TRUE,
                     
                     withSpinner(plotOutput("wordcloud"))
@@ -372,7 +375,7 @@ server <- function(input, output) {
     valueBox(
       subtitle = "Mentiod the most negatively by:", 
       value = "und ist immer vor chef in geschäft", 
-      icon = icon("thumbs-up", lib = "glyphicon"),
+      icon = icon("thumbs-down", lib = "glyphicon"),
       color = "light-blue"
     )
   })
@@ -393,39 +396,42 @@ server <- function(input, output) {
             panel.grid.minor.y = element_blank())
   })
   
-  # barplot
-  
-  sec_counc_words_R1 <- reactive({
-    sec_counc_words %>%
-      filter(country == input$country) %>% 
-      filter(year == input$year) %>%
-      top_n(10, tf) %>%
-      mutate(word = reorder(word, tf))
-  })
-  
-  output$barPlot <- renderPlot({
-    ggplot(data = sec_counc_words_R1(), aes(word, tf)) +
-      geom_col(show.legend = FALSE) +
-      coord_flip() +
-      xlab("Count") +
-      ylab("Word") +
-      theme_bw() +
-      theme(legend.position = "bottom",
-            panel.grid.minor.y = element_blank())
-  })
-  
-  # # wordcloud
+  # # barplot
   # 
-  # sec_counc_words_R2 <- reactive({sec_counc_words %>% 
+  # sec_counc_words_R1 <- reactive({
+  #   sec_counc_words %>%
   #     filter(country == input$country) %>% 
-  #     filter(year == input$year)
+  #     filter(year == input$year) %>%
+  #     top_n(10, tf) %>%
+  #     mutate(word = reorder(word, tf))
   # })
   # 
-  # wordFrame <- sec_counc_words_R2()
-  # output$wordcloud <- renderPlot({
-  #   wordcloud(wordFrame$word, wordFrame$freqword, 
-  #             max.words = input$maxWordsCloud)
+  # output$barPlot <- renderPlot({
+  #   ggplot(data = sec_counc_words_R1(), aes(word, tf)) +
+  #     geom_col(show.legend = FALSE) +
+  #     coord_flip() +
+  #     xlab("Count") +
+  #     ylab("Word") +
+  #     theme_bw() +
+  #     theme(legend.position = "bottom",
+  #           panel.grid.minor.y = element_blank())
   # })
+  
+  # wordcloud
+
+  sec_counc_words_R2 <- reactive({sec_counc_words %>%
+      filter(country == input$country) %>%
+      filter(year == input$year)
+  })
+
+  output$wordcloud <- renderPlot({
+    
+    ggplot(sec_counc_words_R2(), aes(label = word, size = freqword)) +
+      geom_text_wordcloud()
+    
+    # wordcloud(wordFrame$word, wordFrame$freqword,
+    #           max.words = input$maxWordsCloud)
+  })
 
 }
 
