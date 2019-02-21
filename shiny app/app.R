@@ -87,10 +87,11 @@ ui <- dashboardPage(
                        label = "Which words should be plotted?",
                        choices = trending_words$word,
                        selected = c("arab","israel","arms","middle","force,"),
-                       options = list(
-                         `actions-box` = TRUE,
+                       options = pickerOptions(
+                         actionsBox = T,
                          size = 10,
-                         `selected-text-format` = "count > 3"
+                         selectedTextFormat = "count > 3",
+                         maxOptions = 10
                        ),
                        multiple = TRUE
                      )
