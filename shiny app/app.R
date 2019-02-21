@@ -36,15 +36,12 @@ word_corrs <- read.table("word_correlations.csv", header = TRUE, stringsAsFactor
 
 session_info <- read.table("session_info.csv", header = TRUE, stringsAsFactors = FALSE)
 
-<<<<<<< HEAD
 date_country_word <- read.table("date_country_word.csv", header = TRUE, stringsAsFactors = FALSE)
-=======
+
 # dashboard 2
 
 sec_counc_count <- read.csv("securitycouncil_count.csv", header = TRUE, stringsAsFactors = FALSE)
 
-sec_counc_words <- read.csv("securitycouncil_words.csv", header = TRUE, stringsAsFactors = FALSE)
->>>>>>> 5d615799d59494837cf35f024f48f0c8156108ff
 
 # ui ------------------------------------------------------------------------------------------
 
