@@ -20,6 +20,7 @@ library(RColorBrewer)
 library(pheatmap)
 library(ggwordcloud)
 library(highcharter)
+library(htmlTable)
 
 # shiny dashboard -----------------------------------------------------------------------------
 
@@ -43,6 +44,7 @@ session_info <- read.table("session_info.csv", header = TRUE, stringsAsFactors =
 date_country_word <- read.table("date_country_word.csv", header = TRUE, stringsAsFactors = FALSE)
 
 country_codes <- read.table("country_codes.csv", header = TRUE, stringsAsFactors = FALSE)
+sentences <- read.table("sentences_filtered.csv", header = TRUE, stringsAsFactors = FALSE)
 
 # dashboard 2
 
@@ -270,8 +272,9 @@ ui <- dashboardPage(
                     bsModal(id = "wordquote",
                             title = "Quote(s) in which the word appeared",
                             trigger = "lookup",
-                            withSpinner(tableOutput("text"))
-                    )
+                            withSpinner(htmlTableWidgetOutput("text"))
+                    ),
+                    tags$head(tags$style("#wordquote .modal-footer{ display:none}"))
                 )
               )
       ),
@@ -439,11 +442,13 @@ server <- function(input, output) {
   })
   
   ### text window ####
+  
   buttonText <- eventReactive(c(input$lookup),{
     
-    read.table("sentences_filtered.csv", header = TRUE, stringsAsFactors = FALSE) %>% #temporarily here only!
+    sentences %>%
       left_join(country_codes) %>%
       mutate(country=fullname) %>% 
+      filter(date == as.POSIXct(nearPoints(global$filteredWords, input$plot1_click)[1,"date"])) %>%
       filter(country==input$userCountry) %>%
       filter(grepl(nearPoints(global$filteredWords, input$plot1_click)[1,"word"],sentence)) %>%
       select(sentence) %>% 
@@ -451,9 +456,11 @@ server <- function(input, output) {
     
   })
   
-  output$text <- renderTable({
+  output$text <- renderHtmlTableWidget({
     
-    buttonText()
+    htmlTableWidget(buttonText())
+    
+    
     
   })
   
@@ -566,8 +573,6 @@ server <- function(input, output) {
        geom_text(size = 5, position = position_stack(vjust = 0.5),
                  color="white",fontface = "bold") +
        coord_flip() +
-       xlab("Count") +
-       ylab("Word") +
        theme_bw() +
        theme(axis.title.y=element_blank(),
              axis.text.y=element_blank(),
