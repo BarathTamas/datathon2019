@@ -567,7 +567,7 @@ server <- function(input, output) {
    })
    ### barplot #####
    output$barPlot <- renderPlot({
-       ggplot(data = sec_counc_words_R1(), aes(word, tf,label=word)) +
+       ggplot(data = sec_counc_words_R1(), aes(word, freqword,label=word)) +
        geom_col(fill="#5b92e5",color="#5b92e5") +
        xlab(NULL) +
        ylab(NULL) +
@@ -577,8 +577,7 @@ server <- function(input, output) {
        theme_bw() +
        theme(axis.title.y=element_blank(),
              axis.text.y=element_blank(),
-             axis.ticks.y=element_blank())+
-       scale_y_discrete(expand = c(0,0))
+             axis.ticks.y=element_blank())
    })
   
   #### wordcloud #####
