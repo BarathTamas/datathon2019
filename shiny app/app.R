@@ -227,7 +227,7 @@ ui <- dashboardPage(
                     height = "520px",
                     solidHeader = TRUE,
                     
-                    withSpinner(plotOutput("corrPlot"))
+                    withSpinner(highchartOutput("corrPlot"))
                     
                 ),
                 
@@ -380,12 +380,16 @@ server <- function(input, output) {
     pp()
   }, height = 450, width = 700)
   
-  output$corrPlot <- renderPlot({
+  output$corrPlot <- renderHighchart({
     
-    pal <- colorRampPalette(rev(brewer.pal(11, "RdYlBu")))(100)
-    pheatmap(word_corrs, color = pal, treeheight_row = 0, treeheight_col = 0)
+    #pal <- colorRampPalette(rev(brewer.pal(11, "RdYlBu")))(100)
+    #pheatmap(word_corrs, color = pal, treeheight_row = 0, treeheight_col = 0)
     
-  }, height = 450, width = 480)
+    hc_size(hchart(cor(word_corrs)), height = 450, width = 480)
+    
+  }
+  #, height = 450, width = 480
+  )
   
   #### click ####
   
