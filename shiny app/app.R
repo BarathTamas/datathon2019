@@ -451,7 +451,7 @@ server <- function(input, output) {
   
   output$testInfo3 <- renderValueBox({
     valueBox(
-      subtitle = paste0("Mentioned ",  input$country," the most negatively"), 
+      subtitle = paste0("Mentioned ",  input$country," the most negatively in ", input$year), 
       value = paste0(sentimentPercNeg()*100, "%"),
       icon = icon("thumbs-down", lib = "glyphicon"),
       color = "light-blue"
