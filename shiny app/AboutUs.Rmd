@@ -7,11 +7,13 @@ runtime: shiny
 ---
 
 ## Strike Force p<0.05
-### About us
+### About our team
 
-We are all in the first year of the Master of Statistics. The team consists of: Tamas Barath, Atsuki Kojima, Blazej Makosa, Nico Schwemmle, Pascal Wiltschko.
+We are all first year students of the Master of Statistics here at KU Leuven. The team consists of: Tamas Barath, Atsuki Kojima, Blazej Makosa, Nicola Schwemmle, Pascal Wiltschko.
 
-This is our submission for the 2019 Datathon competition at KU Leuven.
+
+This is our creation for the 2019 Datathon competition at KU Leuven.
+
 
 
 
