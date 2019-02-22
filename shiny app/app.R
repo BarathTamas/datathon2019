@@ -453,7 +453,7 @@ server <- function(input, output) {
       left_join(country_codes) %>%
       mutate(country=fullname) %>% 
       filter(country==input$userCountry) %>%
-      filter(grepl("israel",sentence)) %>%
+      filter(grepl(nearPoints(global$filteredWords, input$plot1_click)[1,"word"],sentence)) %>%
       select(sentence) %>% 
       as.data.frame()
     
