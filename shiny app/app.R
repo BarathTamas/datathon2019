@@ -305,7 +305,7 @@ ui <- dashboardPage(
                 #     
                 # ),
                 
-                tabBox(title = "Frequency",
+                tabBox(title = "Top Referring Words",
                        #status = "primary",
                        width = 6,
                        #solidHeader = TRUE,
@@ -549,7 +549,7 @@ server <- function(input, output) {
   output$testInfo5 <- renderValueBox({
     valueBox(
       subtitle = paste0("mentioned ", input$country," the most positive in ", input$year), 
-      value = sentimentPercNeg()[, 2],
+      value = sentimentPercPos()[, 2],
       icon = icon("user-plus", lib = "font-awesome"),
       color = "olive"
     )
