@@ -36,7 +36,7 @@ trending_words <- read.table("trending words.csv", header = TRUE, stringsAsFacto
 
 word_corrs <- read.table("word_correlations.csv", header = TRUE, stringsAsFactors = FALSE)
 
-word_corrs <- read.table("word_corrs_ordered.csv", header = TRUE, stringsAsFactors = FALSE)
+word_corrs_ordered <- read.csv("word_corrs_ordered.csv", header = TRUE, stringsAsFactors = FALSE, row.names = 1)
 
 session_info <- read.table("session_info.csv", header = TRUE, stringsAsFactors = FALSE)
 
@@ -383,7 +383,7 @@ server <- function(input, output) {
     #pal <- colorRampPalette(rev(brewer.pal(11, "RdYlBu")))(100)
     #pheatmap(word_corrs, color = pal, treeheight_row = 0, treeheight_col = 0)
     
-    hc_size(hchart(cor(word_corrs)), height = 450, width = 480)
+    hc_size(hchart(as.matrix(word_corrs_ordered)), height = 450, width = 480)
     
   }
   #, height = 450, width = 480
