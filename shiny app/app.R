@@ -394,7 +394,7 @@ server <- function(input, output) {
     pal <- colorRampPalette(rev(brewer.pal(11, "RdYlBu")))(100)
     #pheatmap(word_corrs, color = pal, treeheight_row = 0, treeheight_col = 0)
     
-    hc <- hchart(as.matrix(word_corrs_ordered)) %>%
+    hc <- hchart(as.matrix(word_corrs_ordered)[1:49,1:49]) %>%
       hc_size(height = 450, width = 480) %>% 
       hc_xAxis(tickmount = 50) %>%
       hc_yAxis(tickmount = 50)
