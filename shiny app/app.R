@@ -599,8 +599,8 @@ server <- function(input, output) {
                                      angle = angle,
                                      replace = TRUE),
            rm_outside = TRUE) +
-      scale_color_gradient(low = "lightgray", high = "blue4") +
-      geom_text_wordcloud_area(shape = "circle", 
+      scale_color_gradient(low = "lightgray", high = "deepskyblue") +
+      geom_text_wordcloud_area(shape = "diamond", 
                                eccentricity = 0.8) +
       scale_size_area(max_size = 24) +
       theme_minimal()
