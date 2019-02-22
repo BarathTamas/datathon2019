@@ -127,9 +127,9 @@ ui <- dashboardPage(
                      
                      knobInput(inputId = "maxWordsCloud",
                                label = HTML('<p style="color:black;">Number of Words in Cloud:</p>'),
-                               value = 20,
+                               value = 50,
                                min = 3,
-                               max = 50,
+                               max = 150,
                                width = "85%",
                                height = "85%",
                                displayPrevious = TRUE,
@@ -250,7 +250,7 @@ ui <- dashboardPage(
                 
                 box(title = "Information About Selected Session",
                     status = "primary",
-                    width = 9,
+                    width = 8,
                     solidHeader = TRUE,
                     
                     withSpinner(tableOutput("click_info"))
@@ -259,28 +259,28 @@ ui <- dashboardPage(
                 
                 box(title = "Frequency by Country (Top Users)",
                     status = "primary",
-                    width = 3,
+                    width = 2,
                     solidHeader = TRUE,
                     
                     withSpinner(tableOutput("click_info2"))
                     
+                ),
+                
+                box(title = "Find in Text",
+                    status = "primary",
+                    width = 2,
+                    solidHeader = TRUE,
+                    withSpinner(tableOutput("click_info3")),
+                    uiOutput('countries'),
+                    actionButton(
+                      "lookup", "Lookup"
+                    ),
+                    
+                    bsModal(id = "wordquote",
+                            title = "Quote(s) in which the word appeared",
+                            trigger = "lookup"
+                    )
                 )
-              ),
-              
-              box(title = "Find in Text",
-                  status = "primary",
-                  width = 9,
-                  solidHeader = TRUE,
-                  withSpinner(tableOutput("click_info3")),
-                  uiOutput('countries'),
-                  actionButton(
-                    "lookup", "Lookup"
-                  ),
-                  
-                  bsModal(id = "wordquote",
-                          title = "Quote(s) in which the word appeared",
-                          trigger = "lookup"
-                  )
               )
       ),
       
