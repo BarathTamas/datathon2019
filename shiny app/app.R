@@ -122,11 +122,14 @@ ui <- dashboardPage(
                                  sep = ""),
                      
                      knobInput(inputId = "maxWordsCloud",
-                               label = HTML('<p style="color:black;">Select Number of Words in Cloud:</p>'),
+                               label = HTML('<p style="color:black;">Number of Words in Cloud:</p>'),
                                value = 20,
                                min = 3,
                                max = 50,
-                               displayPrevious = TRUE, 
+                               width = "100%",
+                               height = "100%",
+                               displayPrevious = TRUE,
+                               immediate = FALSE,
                                lineCap = "round",
                                fgColor = "#5b92e5",
                                inputColor = "#5b92e5"
@@ -494,8 +497,9 @@ server <- function(input, output) {
   })
   
   output$linePlot <- renderHighchart({
-    hchart(sec_counc_count_R()[,1:2], type = "line", hcaes(x=year, y=count), name = "Frequency") %>% 
-      hc_add_theme(hc_theme_smpl()) %>% 
+    hchart(sec_counc_count_R()[,1:2], type = "line", hcaes(x = year, y = count), name = "Frequency") %>% 
+      hc_add_theme(hc_theme_smpl()) %>%
+      hc_plotOptions(line = list(color = "deepskyblue")) %>% 
       hc_xAxis(title = list(text = "Year")) %>% 
       hc_yAxis(title = list(text = "Frequency"))
   })
