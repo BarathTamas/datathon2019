@@ -36,9 +36,7 @@ trending_words <- read.table("trending words.csv", header = TRUE, stringsAsFacto
 
 word_corrs <- read.table("word_correlations.csv", header = TRUE, stringsAsFactors = FALSE)
 
-# session_info <- as.data.frame(data.table::fread("session_info.csv"))
-# 
-# date_country_word <- as.data.frame(data.table::fread("date_country_word.csv"))
+word_corrs <- read.table("word_corrs_ordered.csv", header = TRUE, stringsAsFactors = FALSE)
 
 session_info <- read.table("session_info.csv", header = TRUE, stringsAsFactors = FALSE)
 
