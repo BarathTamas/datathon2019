@@ -7,14 +7,9 @@ library(shiny)
 library(shinyBS)
 library(shinydashboard)
 library(shinythemes)
-# library(shinytest)
 library(DT)
-# library(ggiraph)
-# library(shinyjqui)
 library(shinyWidgets)
 library(shinycssloaders)
-# library(colourpicker)
-# library(formattable)
 library(Cairo)
 library(RColorBrewer)
 library(pheatmap)
@@ -77,7 +72,7 @@ ui <- dashboardPage(
                 
                 menuItem("Trending Words", tabName = "dashboard", icon = icon("chart-line", lib = "font-awesome")),
                 menuItem("Country Sentiment", tabName = "dashboard2", icon = icon("hand-holding-heart", lib = "font-awesome")),
-                menuItem("About Us", tabName = "aboutus", icon = icon("question", lib = "font-awesome"))
+                menuItem("About Us", tabName = "aboutus", icon = icon("users", lib = "font-awesome"))
                 
     ),
     
@@ -91,16 +86,18 @@ ui <- dashboardPage(
                        inputId = "selectedWords",
                        label = HTML('<p style="color:black;">Select Words to Plot:</p>'),
                        choices = trending_words$word,
-                       selected = c("arab","israel","arms","middle","force,"),
+                       selected = c("arab","israel","arms"),
                        options = pickerOptions(
-                         actionsBox = T,
+                         actionsBox = TRUE,
                          size = 10,
                          selectedTextFormat = "count > 3",
                          maxOptions = 10
                        ),
                        multiple = TRUE
                      ),
+                     
                      actionButton("refreshWords","Update Plot")
+                     
     ),
     
     #### sliders DB 2 ####
@@ -118,14 +115,6 @@ ui <- dashboardPage(
                                  choices = 1970:2015,
                                  selected = 2015,
                                  selectize = TRUE),
-                     
-                     # sliderInput(inputId = "year",
-                     #             label = HTML('<p style="color:black;">Select Year for Wordcloud:</p>'),
-                     #             min = 1970,
-                     #             max = 2015,
-                     #             value = 2015,
-                     #             step = 1,
-                     #             sep = ""),
                      
                      knobInput(inputId = "maxWordsCloud",
                                label = HTML('<p style="color:black;">Fill Wordcloud:</p>'),
@@ -203,9 +192,6 @@ ui <- dashboardPage(
                               .box.box-solid.box-primary>.box-header {
                               color:#fff;
                               }
-
-                              
-                              
                               
                               .box.box-solid.box-primary>.box-header {
                               color:#fff;
@@ -218,7 +204,9 @@ ui <- dashboardPage(
                               border-right-color:#5b92e5;
                               border-top-color:#5b92e5;
                               }
-                              '))),
+                              ')
+    )
+    ),
     
     tabItems(
       
@@ -300,7 +288,10 @@ ui <- dashboardPage(
                 
                 withSpinner(valueBoxOutput("testInfo1")),
                 withSpinner(valueBoxOutput("testInfo2")),
-                withSpinner(valueBoxOutput("testInfo3"))
+                withSpinner(valueBoxOutput("testInfo3")),
+                withSpinner(valueBoxOutput("testInfo4")),
+                withSpinner(valueBoxOutput("testInfo5")),
+                withSpinner(valueBoxOutput("testInfo6"))
                 
               ),
               
@@ -324,14 +315,14 @@ ui <- dashboardPage(
                 #     
                 # ),
                 
-                tabBox(title = "Frequency",
-                    #status = "primary",
-                    width = 6,
-                    #solidHeader = TRUE,
-                    
-                    tabPanel("Wordcloud", withSpinner(plotOutput("wordcloud"))),
-                    tabPanel("Bar chart", withSpinner(plotOutput("barPlot")))
-                    
+                tabBox(title = "Top Referring Words",
+                       #status = "primary",
+                       width = 6,
+                       #solidHeader = TRUE,
+                       
+                       tabPanel("Wordcloud", withSpinner(plotOutput("wordcloud"))),
+                       tabPanel("Bar chart", withSpinner(plotOutput("barPlot")))
+                       
                 )
               )
               
@@ -408,7 +399,9 @@ server <- function(input, output) {
     hc$x$hc_opts$colorAxis$stops <- NULL
     
     hc %>% 
-      hc_colorAxis(stops = color_stops(11, colors=pal))
+      hc_colorAxis(stops = color_stops(11, colors=pal)) %>%
+      hc_xAxis(visible = F) #%>%
+      #hc_yAxis(visible = F)
     
   }
   #, height = 450, width = 480
@@ -514,14 +507,14 @@ server <- function(input, output) {
     
     sentiment_data %>%
       filter(year == input$year & country == input$country & sentiment == "positive") %>% 
-      select(proportionsentiment2)
+      select(proportion, top_country)
     
   })
   
   output$testInfo2 <- renderValueBox({
     valueBox(
       subtitle = paste0("of words referring to ", input$country," in ", input$year, " were positive"), 
-      value = sentimentPercPos(),
+      value = sentimentPercPos()[, 1],
       icon = icon("thumbs-up", lib = "glyphicon"),
       color = "olive"
     )
@@ -535,15 +528,56 @@ server <- function(input, output) {
     
     sentiment_data %>%
       filter(year == input$year & country == input$country & sentiment == "negative") %>% 
-      select(proportionsentiment2)
+      select(proportion, top_country)
     
   })
   
   output$testInfo3 <- renderValueBox({
     valueBox(
       subtitle = paste0("of words referring to ", input$country," in ", input$year, " were negative"), 
-      value = sentimentPercNeg(),
+      value = sentimentPercNeg()[, 1],
       icon = icon("thumbs-down", lib = "glyphicon"),
+      color = "red"
+    )
+  })
+  
+  #### info box 4 ####
+  
+  yearCount <- reactive({
+    
+    sec_counc_count %>%
+      filter(year == input$year & country == input$country) %>% 
+      select(count)
+    
+  })
+  
+  output$testInfo4 <- renderValueBox({
+    valueBox(
+      subtitle = paste0("times ", input$country, " was mentioned in ", input$year),
+      value = yearCount(),
+      icon = icon("sort-amount-up", lib = "font-awesome"),
+      color = "light-blue"
+    )
+  })
+  
+  #### info box 5 ####
+  
+  output$testInfo5 <- renderValueBox({
+    valueBox(
+      subtitle = paste0("mentioned ", input$country," the most positive in ", input$year), 
+      value = sentimentPercPos()[, 2],
+      icon = icon("user-plus", lib = "font-awesome"),
+      color = "olive"
+    )
+  })
+  
+  #### info box 6 ####
+  
+  output$testInfo6 <- renderValueBox({
+    valueBox(
+      subtitle = paste0("mentioned ", input$country," the most negative in ", input$year), 
+      value = sentimentPercNeg()[, 2],
+      icon = icon("user-minus", lib = "font-awesome"),
       color = "red"
     )
   })
