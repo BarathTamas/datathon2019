@@ -36,9 +36,7 @@ trending_words <- read.table("trending words.csv", header = TRUE, stringsAsFacto
 
 word_corrs <- read.table("word_correlations.csv", header = TRUE, stringsAsFactors = FALSE)
 
-# session_info <- as.data.frame(data.table::fread("session_info.csv"))
-# 
-# date_country_word <- as.data.frame(data.table::fread("date_country_word.csv"))
+word_corrs <- read.table("word_corrs_ordered.csv", header = TRUE, stringsAsFactors = FALSE)
 
 session_info <- read.table("session_info.csv", header = TRUE, stringsAsFactors = FALSE)
 
@@ -114,7 +112,7 @@ ui <- dashboardPage(
                                  selectize = TRUE),
                      
                      sliderInput(inputId = "year",
-                                 label = HTML('<p style="color:black;">Select Year:</p>'),
+                                 label = HTML('<p style="color:black;">Select Year for Wordcloud:</p>'),
                                  min = 1970,
                                  max = 2015,
                                  value = 2015,
@@ -450,7 +448,7 @@ server <- function(input, output) {
       subtitle = paste0("is the Sentiment Index in ", input$year), 
       value = "WIP",
       icon = icon("heartbeat", lib = "font-awesome"),
-      color = "navy"
+      color = "light-blue"
     )
   })
   
@@ -470,7 +468,7 @@ server <- function(input, output) {
       subtitle = paste0("Mentioned ", input$country," the most positively in ", input$year), 
       value = paste0(sentimentPercPos()*100, "%"),
       icon = icon("thumbs-up", lib = "glyphicon"),
-      color = "blue"
+      color = "olive"
     )
   })
   
@@ -490,7 +488,7 @@ server <- function(input, output) {
       subtitle = paste0("Mentioned ",  input$country," the most negatively in ", input$year), 
       value = paste0(sentimentPercNeg()*100, "%"),
       icon = icon("thumbs-down", lib = "glyphicon"),
-      color = "light-blue"
+      color = "red"
     )
   })
   
