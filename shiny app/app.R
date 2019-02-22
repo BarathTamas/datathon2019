@@ -392,6 +392,16 @@ server <- function(input, output) {
     
     pal <- colorRampPalette(rev(brewer.pal(11, "RdYlBu")))(100)
     #pheatmap(word_corrs, color = pal, treeheight_row = 0, treeheight_col = 0)
+<<<<<<< HEAD
+    hc <- hchart(as.matrix(word_corrs_ordered)) %>%
+      hc_size(height = 450, width = 480)
+      
+    hc$x$hc_opts$colorAxis$stops <- NULL
+      
+    hc %>% 
+      hc_colorAxis(stops = color_stops(11, colors=pal))
+    
+=======
     
     
       hchart(as.matrix(word_corrs_ordered)) %>%
@@ -399,6 +409,7 @@ server <- function(input, output) {
       hc_colorAxis(stops = color_stops(10, rev(RColorBrewer::brewer.pal(10, "RdYlBu")))) %>%
       hc_xAxis(tickmount = 50) %>%
       hc_yAxis(tickmount = 50)
+>>>>>>> 12bc53ce4289e66de55bb6fef9491f72869282eb
     
   }
   #, height = 450, width = 480
