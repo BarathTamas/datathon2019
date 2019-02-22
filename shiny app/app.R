@@ -528,13 +528,13 @@ server <- function(input, output) {
     
     ggplot(sec_counc_words_R2(), aes(label = word, 
                                      size = freqword,
-                                     color = freqword,
+                                     color = country,
                                      angle = angle,
                                      replace = TRUE),
            rm_outside = TRUE) +
-      scale_color_gradient(low = "darkred", high = "darkblue") +
-      scale_size_area(max_size = 20) +
-      geom_text_wordcloud(shape = "circle") +
+      geom_text_wordcloud_area(shape = "circle", 
+                               eccentricity = 0.35) +
+      scale_size_area(max_size = 24) +
       theme_minimal()
     
   })
