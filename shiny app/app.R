@@ -129,16 +129,15 @@ ui <- dashboardPage(
                                label = HTML('<p style="color:black;">Number of Words in Cloud:</p>'),
                                value = 50,
                                min = 3,
-                               max = 150,
-                               width = "85%",
-                               height = "85%",
+                               max = 80,
+                               width = "100%",
+                               height = "90%",
                                displayPrevious = TRUE,
                                immediate = FALSE,
                                lineCap = "round",
                                fgColor = "#5b92e5",
                                inputColor = "#5b92e5"
                      )
-                     
     ),
     
     #### sliders DB 3 ####
@@ -489,18 +488,19 @@ server <- function(input, output) {
   
   # mentiod the most positively by
   
-  sentimentCountryPos <- reactive({
+  sentimentPercPos <- reactive({
     
     sentiment_data %>%
       filter(year == input$year & country == input$country & sentiment == "positive") %>% 
-      select(othercountries)
+      select(proportionsentiment) %>% 
+      mutate(proportionsentiment = round(proportionsentiment, 2))
     
   })
   
   output$testInfo2 <- renderValueBox({
     valueBox(
       subtitle = paste0("Mentioned ", input$country," the most positively in ", input$year), 
-      value = sentimentCountryPos(),
+      value = paste0(sentimentPercPos()*100, "%"),
       icon = icon("thumbs-up", lib = "glyphicon"),
       color = "olive"
     )
@@ -510,18 +510,19 @@ server <- function(input, output) {
   
   # mentiod the most negatively by
   
-  sentimentCountryNeg <- reactive({
+  sentimentPercNeg <- reactive({
     
     sentiment_data %>%
       filter(year == input$year & country == input$country & sentiment == "negative") %>% 
-      select(othercountries)
+      select(proportionsentiment) %>% 
+      mutate(proportionsentiment = round(proportionsentiment, 2))
     
   })
   
   output$testInfo3 <- renderValueBox({
     valueBox(
       subtitle = paste0("Mentioned ",  input$country," the most negatively in ", input$year), 
-      value = sentimentCountryNeg(),
+      value = paste0(sentimentPercNeg()*100, "%"),
       icon = icon("thumbs-down", lib = "glyphicon"),
       color = "red"
     )
@@ -589,7 +590,7 @@ server <- function(input, output) {
                                      replace = TRUE),
            rm_outside = TRUE) +
       geom_text_wordcloud_area(shape = "circle", 
-                               eccentricity = 0.35) +
+                               eccentricity = 1) +
       scale_size_area(max_size = 24) +
       theme_minimal()
     
