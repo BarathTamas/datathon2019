@@ -565,16 +565,20 @@ server <- function(input, output) {
        top_n(10, tf) %>%
        mutate(word = reorder(word, tf))
    })
-   
+   ### barplot #####
    output$barPlot <- renderPlot({
-     ggplot(data = sec_counc_words_R1(), aes(word, tf)) +
-       geom_col(show.legend = FALSE) +
+       ggplot(data = sec_counc_words_R1(), aes(word, tf,label=word)) +
+       geom_col(fill="#5b92e5",color="#5b92e5") +
+       xlab(NULL) +
+       ylab(NULL) +
+       geom_text(size = 5, position = position_stack(vjust = 0.5),
+                 color="white",fontface = "bold") +
        coord_flip() +
-       xlab("Count") +
-       ylab("Word") +
        theme_bw() +
-       theme(legend.position = "bottom",
-             panel.grid.minor.y = element_blank())
+       theme(axis.title.y=element_blank(),
+             axis.text.y=element_blank(),
+             axis.ticks.y=element_blank())+
+       scale_y_discrete(expand = c(0,0))
    })
   
   #### wordcloud #####
