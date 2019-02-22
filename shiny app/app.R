@@ -111,13 +111,19 @@ ui <- dashboardPage(
                                  selected = sec_counc_count$country[1],
                                  selectize = TRUE),
                      
-                     sliderInput(inputId = "year",
+                     selectInput(inputId = "year",
                                  label = HTML('<p style="color:black;">Select Year for Wordcloud:</p>'),
-                                 min = 1970,
-                                 max = 2015,
-                                 value = 2015,
-                                 step = 1,
-                                 sep = ""),
+                                 choices = 1970:2015,
+                                 selected = 2015,
+                                 selectize = TRUE),
+                     
+                     # sliderInput(inputId = "year",
+                     #             label = HTML('<p style="color:black;">Select Year for Wordcloud:</p>'),
+                     #             min = 1970,
+                     #             max = 2015,
+                     #             value = 2015,
+                     #             step = 1,
+                     #             sep = ""),
                      
                      knobInput(inputId = "maxWordsCloud",
                                label = HTML('<p style="color:black;">Number of Words in Cloud:</p>'),
@@ -346,7 +352,7 @@ ui <- dashboardPage(
 
 server <- function(input, output) {
   
-  #### rend. obj. DB 1 ####
+  #### DB 1 ####
   global <- reactiveValues(
     filtereWords=NULL,
     countries = NULL
@@ -380,6 +386,8 @@ server <- function(input, output) {
     pp()
   }, height = 450, width = 700)
   
+  #### corr plot ####
+  
   output$corrPlot <- renderHighchart({
     
     pal <- colorRampPalette(rev(brewer.pal(11, "RdYlBu")))(100)
@@ -399,7 +407,7 @@ server <- function(input, output) {
   #, height = 450, width = 480
   )
   
-  #### click ####
+  #### info table 1 ####
   
   output$click_info <- renderTable({
     
@@ -410,6 +418,7 @@ server <- function(input, output) {
     
   }, options = list(searching = FALSE, paging = FALSE))
   
+  #### info table 2 ####
   
   output$click_info2 <- renderTable({
     
@@ -424,6 +433,8 @@ server <- function(input, output) {
     
     
   }, options = list(searching = FALSE, paging = FALSE)) 
+  
+  #### info table 3 ####
   
   output$click_info3 <- renderTable({
     
@@ -440,7 +451,9 @@ server <- function(input, output) {
     selectInput("columns",'Country using the word', global$countries$country)
   })
   
-  #### rend. obj. DB 2 ####
+  #### DB 2 ####
+  
+  #### info box 1 ####
   
   # sentiment index
   
@@ -462,6 +475,8 @@ server <- function(input, output) {
     )
   })
   
+  #### info box 2 ####
+  
   # mentiod the most positively by
   
   sentimentCountryPos <- reactive({
@@ -480,6 +495,8 @@ server <- function(input, output) {
       color = "olive"
     )
   })
+  
+  #### info box 3 ####
   
   # mentiod the most negatively by
   
