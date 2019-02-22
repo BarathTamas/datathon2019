@@ -230,7 +230,7 @@ ui <- dashboardPage(
                     height = "520px",
                     solidHeader = TRUE,
                     
-                    withSpinner(highchartOutput("corrPlot"))
+                    withSpinner(highchartOutput("corrPlot", width = 480, height = 480))
                     
                 ),
                 
