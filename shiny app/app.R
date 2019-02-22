@@ -189,10 +189,22 @@ ui <- dashboardPage(
                               }
 /* box header */
                               .box.box-solid.box-primary>.box-header {
-                              color:#fff;
+                              color:#ffffff;
                               }
 
 
+
+.box.box-solid.box-primary>.box-header {
+  color:#fff;
+                              background:#5b92e5
+                              }
+                              
+                              .box.box-solid.box-primary{
+                              border-bottom-color:#5b92e5;
+                              border-left-color:#5b92e5;
+                              border-right-color:#5b92e5;
+                              border-top-color:#5b92e5;
+                              }
 
                               '))),
     
@@ -205,17 +217,16 @@ ui <- dashboardPage(
               fluidRow(
                 
                 box(title = "Heatmap Displaying Clusters of Correlated Word Trends",
-                    status = "info",
+                    status = "primary",
                     width = 5,
                     height = "520px",
                     solidHeader = TRUE,
-                    
                     withSpinner(plotOutput("corrPlot"))
                     
                 ),
                 
                 box(title = "Frequency of Selected Words Over Time (click points for more information)",
-                    status = "info",
+                    status = "primary",
                     width = 7,
                     height = "520px",
                     solidHeader = TRUE,
@@ -228,7 +239,7 @@ ui <- dashboardPage(
               fluidRow(
                 
                 box(title = "Information About Selected Session",
-                    status = "info",
+                    status = "primary",
                     width = 7,
                     solidHeader = TRUE,
                     
@@ -240,7 +251,7 @@ ui <- dashboardPage(
               fluidRow(
                 
                 box(title = "Frequency by Country (Top Users)",
-                    status = "info",
+                    status = "primary",
                     width = 3,
                     solidHeader = TRUE,
                     
@@ -249,9 +260,10 @@ ui <- dashboardPage(
                 ),
                 
                 box(title = "Find in Text",
-                    status = "info",
+                    status = "primary",
                     width = 3,
                     solidHeader = TRUE,
+                    
                     withSpinner(tableOutput("click_info3")),
                     uiOutput('countries'),
                     actionButton(
@@ -278,7 +290,7 @@ ui <- dashboardPage(
               fluidRow(
                 
                 box(title = "Line Plot",
-                    status = "info",
+                    status = "primary",
                     width = 6,
                     solidHeader = TRUE,
                     
@@ -296,7 +308,7 @@ ui <- dashboardPage(
                 # ),
                 
                 box(title = "Wordcloud",
-                    status = "info",
+                    status = "primary",
                     width = 6,
                     solidHeader = TRUE,
                     
