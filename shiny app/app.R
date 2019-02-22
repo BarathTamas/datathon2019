@@ -127,9 +127,9 @@ ui <- dashboardPage(
                      
                      knobInput(inputId = "maxWordsCloud",
                                label = HTML('<p style="color:black;">Number of Words in Cloud:</p>'),
-                               value = 50,
+                               value = 45,
                                min = 3,
-                               max = 80,
+                               max = 60,
                                width = "100%",
                                height = "90%",
                                displayPrevious = TRUE,
@@ -306,31 +306,23 @@ ui <- dashboardPage(
                     
                 ),
                 
-                #tabBox(title = "Bar Plot",
-                #     status = "primary",
-                #     width = 6,
+                # box(title = "Bar Plot",
+                #     status = "info",
+                #     width = 3,
                 #     solidHeader = TRUE,
                 #     
                 #     withSpinner(plotOutput("barPlot"))
                 #     
                 # ),
                 
-                tabBox(title = "Frequency",
-                       #status = "primary",
-                       width = 6,
-                       tabPanel("Wordcloud", withSpinner(plotOutput("wordcloud"))),
-                       tabPanel("Bar plot", withSpinner(plotOutput("barPlot")))
-                  
+                box(title = "Wordcloud",
+                    status = "primary",
+                    width = 6,
+                    solidHeader = TRUE,
+                    
+                    withSpinner(plotOutput("wordcloud"))
+                    
                 )
-                
-                #box(title = "Wordcloud",
-                #    status = "primary",
-                #    width = 6,
-                #    solidHeader = TRUE,
-                #    
-                #    withSpinner(plotOutput("wordcloud"))
-                #    
-                #)
               )
               
       ),
@@ -560,26 +552,26 @@ server <- function(input, output) {
   #           panel.grid.minor.y = element_blank())
   # })
   
-   # barplot
-   
-  sec_counc_words_R1 <- reactive({
-     sec_counc_words %>%
-       filter(country == input$country) %>% 
-       filter(year == input$year) %>%
-       top_n(10, tf) %>%
-       mutate(word = reorder(word, tf))
-   })
-   
-   output$barPlot <- renderPlot({
-     ggplot(data = sec_counc_words_R1(), aes(word, tf)) +
-       geom_col(show.legend = FALSE) +
-       coord_flip() +
-       xlab("Count") +
-       ylab("Word") +
-       theme_bw() +
-       theme(legend.position = "bottom",
-             panel.grid.minor.y = element_blank())
-   })
+  # # barplot
+  # 
+  # sec_counc_words_R1 <- reactive({
+  #   sec_counc_words %>%
+  #     filter(country == input$country) %>% 
+  #     filter(year == input$year) %>%
+  #     top_n(10, tf) %>%
+  #     mutate(word = reorder(word, tf))
+  # })
+  # 
+  # output$barPlot <- renderPlot({
+  #   ggplot(data = sec_counc_words_R1(), aes(word, tf)) +
+  #     geom_col(show.legend = FALSE) +
+  #     coord_flip() +
+  #     xlab("Count") +
+  #     ylab("Word") +
+  #     theme_bw() +
+  #     theme(legend.position = "bottom",
+  #           panel.grid.minor.y = element_blank())
+  # })
   
   #### wordcloud #####
   
@@ -599,7 +591,7 @@ server <- function(input, output) {
            rm_outside = TRUE) +
       scale_color_gradient(low = "lightgray", high = "blue4") +
       geom_text_wordcloud_area(shape = "circle", 
-                               eccentricity = 1) +
+                               eccentricity = 0.8) +
       scale_size_area(max_size = 24) +
       theme_minimal()
     
