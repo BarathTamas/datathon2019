@@ -97,11 +97,7 @@ ui <- dashboardPage(
                          maxOptions = 10
                        ),
                        multiple = TRUE
-                     ),
-                     
-                     actionButton(
-                       "update", "Update View"
-                    )
+                     )
     ),
     
     #### sliders DB 2 ####
@@ -204,7 +200,7 @@ ui <- dashboardPage(
               
               fluidRow(
                 
-                box(title = "Heatmap Displaying Word Correlations",
+                box(title = "Heatmap Displaying Clusters of Correlated Word Trends",
                     status = "info",
                     width = 5,
                     height = "550px",
@@ -215,7 +211,7 @@ ui <- dashboardPage(
                     
                 ),
                 
-                box(title = "Frequency of Selected Words Over Time (click to receive information)",
+                box(title = "Frequency of Selected Words Over Time (click points for more information)",
                     status = "info",
                     width = 7,
                     height = "550px",
@@ -232,7 +228,7 @@ ui <- dashboardPage(
                     width = 7,
                     solidHeader = TRUE,
                     
-                    withSpinner(dataTableOutput("click_info"))
+                    withSpinner(tableOutput("click_info"))
                     
                 )
               ),  
@@ -243,7 +239,19 @@ ui <- dashboardPage(
                     width = 3,
                     solidHeader = TRUE,
                     
-                    withSpinner(dataTableOutput("click_info2"))
+                    withSpinner(tableOutput("click_info2"))
+                    
+                ),
+                
+                box(title = "Find in Text",
+                    status = "info",
+                    width = 3,
+                    solidHeader = TRUE,
+                    withSpinner(tableOutput("click_info3")),
+                    uiOutput('countries'),
+                    actionButton(
+                      "lookup", "Lookup"
+                    )
                     
                 )
                 
@@ -312,7 +320,7 @@ ui <- dashboardPage(
 
 server <- function(input, output) {
   
-  #### rendered objects DB 1 ####
+  #### rend. obj. DB 1 ####
   
   filteredWords <- reactive({
     words_ts %>% 
@@ -345,29 +353,49 @@ server <- function(input, output) {
     
   }, height = 490, width = 520)
   
-  output$click_info <- renderDataTable({
+  #### click ####
+  
+  output$click_info <- renderTable({
     
     session_info %>%
-      filter(date == as.POSIXct(nearPoints(filteredWords(), input$plot1_click)[1,"date"]))
+      filter(date == as.POSIXct(nearPoints(filteredWords(), input$plot1_click)[1,"date"])) %>% 
+      mutate(date=format(as.POSIXct(date),'%Y %B')) %>% 
+      as.data.frame()
     
   }, options = list(searching = FALSE, paging = FALSE))
   
-  output$click_info2 <- renderDataTable({
+  global <- reactiveValues(countries = NULL)
+  
+  output$click_info2 <- renderTable({
     
-    date_country_word %>%
+    global$countries <- date_country_word %>%
       filter(date == as.POSIXct(nearPoints(filteredWords(), input$plot1_click)[1,"date"])) %>% 
       filter(word == nearPoints(filteredWords(), input$plot1_click)[1,"word"]) %>% 
       top_n(5) %>%
       left_join(country_codes) %>% #despite intuition its faster this way then prejoining 
       arrange(desc(n)) %>% 
       mutate(country=fullname,frequency=n) %>% 
-      select(country,frequency)
-      
+      select(country,frequency) %>% as.data.frame()
     
     
-  }, options = list(searching = FALSE, paging = FALSE))  
+  }, options = list(searching = FALSE, paging = FALSE)) 
+
+  output$click_info3 <- renderTable({
+    
+    data.frame(
+      word = nearPoints(filteredWords(), input$plot1_click)[1,"word"],
+      date = format(as.POSIXct(nearPoints(filteredWords(), input$plot1_click)[1,"date"]),'%Y %B'),
+      stringsAsFactors = FALSE)
+    
+  })
   
-  #### rendered objects DB 2 ####
+  
+  
+  output$countries = renderUI({
+    selectInput("columns",'Country using the word', global$countries$country)
+  })
+  
+  #### rend. obj. DB 2 ####
   
   # sentiment index
   
