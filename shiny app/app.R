@@ -200,9 +200,6 @@ ui <- dashboardPage(
                               .box.box-solid.box-primary>.box-header {
                               color:#fff;
                               }
-
-                              
-                              
                               
                               .box.box-solid.box-primary>.box-header {
                               color:#fff;
@@ -215,7 +212,9 @@ ui <- dashboardPage(
                               border-right-color:#5b92e5;
                               border-top-color:#5b92e5;
                               }
-                              '))),
+                              ')
+    )
+    ),
     
     tabItems(
       
@@ -231,7 +230,7 @@ ui <- dashboardPage(
                     height = "520px",
                     solidHeader = TRUE,
                     
-                    withSpinner(highchartOutput("corrPlot"))
+                    withSpinner(highchartOutput("corrPlot", width = 480, height = 480))
                     
                 ),
                 
@@ -250,42 +249,44 @@ ui <- dashboardPage(
                 
                 box(title = "Information About Selected Session",
                     status = "primary",
-                    width = 7,
+                    width = 9,
                     solidHeader = TRUE,
                     
                     withSpinner(tableOutput("click_info"))
-                    
-                )
+                ),
+                    box(title = "Frequency by Country (Top Users)",
+                        status = "primary",
+                        width = 3,
+                        solidHeader = TRUE,
+                        
+                        withSpinner(tableOutput("click_info2"))
+                        
+                    )
               ),
               
               fluidRow(
                 
-                box(title = "Frequency by Country (Top Users)",
-                    status = "primary",
-                    width = 3,
-                    solidHeader = TRUE,
-                    
-                    withSpinner(tableOutput("click_info2"))
-                    
-                ),
-                
                 box(title = "Find in Text",
                     status = "primary",
-                    width = 3,
+                    width = 12,
                     solidHeader = TRUE,
                     withSpinner(tableOutput("click_info3")),
                     uiOutput('countries'),
                     actionButton(
                       "lookup", "Lookup"
-                ),
+                    ),
                     
-                 bsModal(id = "wordquote",
+                    bsModal(id = "wordquote",
                             title = "Quote(s) in which the word appeared",
                             trigger = "lookup"
+<<<<<<< HEAD
                  )
                     
+=======
+                            
+                    )
+>>>>>>> 2ea5371cf0873320fb1b71dd14f011a2c85dbc70
                 )
-                
               )
       ),
       
@@ -391,14 +392,14 @@ server <- function(input, output) {
     
     pal <- colorRampPalette(rev(brewer.pal(11, "RdYlBu")))(100)
     #pheatmap(word_corrs, color = pal, treeheight_row = 0, treeheight_col = 0)
-
+    
     hc <- hchart(as.matrix(word_corrs_ordered)) %>%
       hc_size(height = 450, width = 480) %>% 
       hc_xAxis(tickmount = 50) %>%
       hc_yAxis(tickmount = 50)
-      
+    
     hc$x$hc_opts$colorAxis$stops <- NULL
-      
+    
     hc %>% 
       hc_colorAxis(stops = color_stops(11, colors=pal))
     
@@ -473,12 +474,12 @@ server <- function(input, output) {
   # sentiment index
   
   sentimentScore <- reactive({
-
+    
     sentiment_data %>%
       filter(year == input$year & country == input$country) %>%
       select(totalscore) %>%
       mutate(totalscore = round(totalscore, 2))
-
+    
   })
   
   output$testInfo1 <- renderValueBox({
