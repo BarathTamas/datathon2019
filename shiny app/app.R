@@ -385,7 +385,9 @@ server <- function(input, output) {
     hc$x$hc_opts$colorAxis$stops <- NULL
     
     hc %>% 
-      hc_colorAxis(stops = color_stops(11, colors=pal))
+      hc_colorAxis(stops = color_stops(11, colors=pal)) %>%
+      hc_xAxis(visible = F) #%>%
+      #hc_yAxis(visible = F)
     
   }
   #, height = 450, width = 480
