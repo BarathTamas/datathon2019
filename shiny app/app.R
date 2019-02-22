@@ -97,7 +97,8 @@ ui <- dashboardPage(
                          maxOptions = 10
                        ),
                        multiple = TRUE
-                     )
+                     ),
+                     actionButton("refreshWords","Update Plot")
     ),
     
     #### sliders DB 2 ####
@@ -337,14 +338,15 @@ ui <- dashboardPage(
 server <- function(input, output) {
   
   #### rend. obj. DB 1 ####
+  global <- reactiveValues(
+    filtereWords=NULL,
+    countries = NULL
+    )
   
-  filteredWords <- reactive({
-    words_ts %>% 
-      filter(word %in% input$selectedWords)
-  })
-  
-  output$wordsOverTime <- renderPlot({
-    ggplot(data = filteredWords(), aes(date, n, color = word)) +
+  pp <- eventReactive(c(input$refreshWords),{
+    global$filteredWords <- words_ts %>% filter(word %in% input$selectedWords) 
+    global$filteredWords %>% 
+      ggplot(aes(date, n, color = word)) +
       geom_line(size = 1.3) +
       geom_point(size = 5, alpha = 0.5) +
       scale_x_datetime(breaks = seq(as.POSIXct("1970-01-01"),
@@ -360,7 +362,12 @@ server <- function(input, output) {
       theme_bw() +
       theme(legend.position = "bottom",
             panel.grid.minor.y = element_blank())
-  }, height = 450, width = 700)
+  })
+  
+
+  output$wordsOverTime <- renderPlot({
+    pp()
+    }, height = 450, width = 700)
   
   output$corrPlot <- renderPlot({
     
@@ -374,19 +381,18 @@ server <- function(input, output) {
   output$click_info <- renderTable({
     
     session_info %>%
-      filter(date == as.POSIXct(nearPoints(filteredWords(), input$plot1_click)[1,"date"])) %>% 
+      filter(date == as.POSIXct(nearPoints(global$filteredWords, input$plot1_click)[1,"date"])) %>% 
       mutate(date=format(as.POSIXct(date),'%Y %B')) %>% 
       as.data.frame()
     
   }, options = list(searching = FALSE, paging = FALSE))
-  
-  global <- reactiveValues(countries = NULL)
+
   
   output$click_info2 <- renderTable({
     
     global$countries <- date_country_word %>%
-      filter(date == as.POSIXct(nearPoints(filteredWords(), input$plot1_click)[1,"date"])) %>% 
-      filter(word == nearPoints(filteredWords(), input$plot1_click)[1,"word"]) %>% 
+      filter(date == as.POSIXct(nearPoints(global$filteredWords, input$plot1_click)[1,"date"])) %>% 
+      filter(word == nearPoints(global$filteredWords, input$plot1_click)[1,"word"]) %>% 
       top_n(5) %>%
       left_join(country_codes) %>% #despite intuition its faster this way then prejoining 
       arrange(desc(n)) %>% 
@@ -399,8 +405,8 @@ server <- function(input, output) {
   output$click_info3 <- renderTable({
     
     data.frame(
-      word = nearPoints(filteredWords(), input$plot1_click)[1,"word"],
-      date = format(as.POSIXct(nearPoints(filteredWords(), input$plot1_click)[1,"date"]),'%Y %B'),
+      word = nearPoints(global$filteredWords, input$plot1_click)[1,"word"],
+      date = format(as.POSIXct(nearPoints(global$filteredWords, input$plot1_click)[1,"date"]),'%Y %B'),
       stringsAsFactors = FALSE)
     
   })
