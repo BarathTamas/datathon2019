@@ -1,0 +1,461 @@
+year,country,sentiment,proportionsentiment,othercountries,totalscore
+1970,China,negative,0.48519362186788156,Albania,13
+1970,China,positive,0.5148063781321185,Albania,13
+1971,China,negative,0.37207748830995324,Albania,383
+1971,China,positive,0.6279225116900468,Albania,383
+1972,China,negative,0.39615384615384613,Albania,162
+1972,China,positive,0.6038461538461538,Albania,162
+1973,China,negative,0.3366733466933868,Albania,163
+1973,China,positive,0.6633266533066132,Albania,163
+1974,China,negative,0.46184738955823296,Burundi,19
+1974,China,positive,0.5381526104417671,Albania,19
+1975,China,negative,0.4440993788819876,Albania,36
+1975,China,positive,0.5559006211180124,Albania,36
+1976,China,negative,0.31016042780748665,Albania,142
+1976,China,positive,0.6898395721925134,Zambia,142
+1977,China,negative,0.3472222222222222,Algeria Cambodia Thailand,22
+1977,China,positive,0.6527777777777778,Laos,22
+1978,China,negative,0.5642857142857143,Thailand,-18
+1978,China,positive,0.4357142857142857,Burundi Cuba,-18
+1979,China,negative,0.5376569037656904,Albania,-36
+1979,China,positive,0.46234309623430964,Vietnam,-36
+1980,China,negative,0.6470588235294118,Vietnam,-110
+1980,China,positive,0.35294117647058826,Vietnam,-110
+1981,China,negative,0.5028089887640449,Vietnam,-2
+1981,China,positive,0.49719101123595505,Vietnam,-2
+1982,China,negative,0.5288888888888889,Vietnam,-13
+1982,China,positive,0.4711111111111111,Laos,-13
+1983,China,negative,0.46488294314381273,Vietnam,21
+1983,China,positive,0.5351170568561873,Vietnam,21
+1984,China,negative,0.4911504424778761,Vietnam,4
+1984,China,positive,0.5088495575221239,Laos,4
+1985,China,negative,0.32142857142857145,Czechoslovakia Vietnam,40
+1985,China,positive,0.6785714285714286,Malta,40
+1986,China,negative,0.43548387096774194,Thailand,8
+1986,China,positive,0.5645161290322581,Vietnam,8
+1987,China,negative,0.23809523809523808,Cambodia,55
+1987,China,positive,0.7619047619047619,Vietnam,55
+1988,China,negative,0.27722772277227725,Madagascar,45
+1988,China,positive,0.7227722772277227,Madagascar,45
+1989,China,negative,0.3917525773195876,UK,21
+1989,China,positive,0.6082474226804123,UK,21
+1990,China,negative,0.21818181818181817,Vietnam,31
+1990,China,positive,0.7818181818181819,Vietnam,31
+1991,China,negative,0.1643835616438356,Vietnam,49
+1991,China,positive,0.8356164383561644,North Korea,49
+1992,China,negative,0.2112676056338028,Philippines,41
+1992,China,positive,0.7887323943661971,Vietnam,41
+1993,China,negative,0.24528301886792453,Malawi,54
+1993,China,positive,0.7547169811320755,Solomon Islands,54
+1994,China,negative,0.1694915254237288,Central African Republic,78
+1994,China,positive,0.8305084745762712,Solomon Islands,78
+1995,China,negative,0.25,Solomon Islands,68
+1995,China,positive,0.75,Fiji,68
+1996,China,negative,0.21875,Dominica Palau,90
+1996,China,positive,0.78125,Grenada,90
+1997,China,negative,0.184,Liberia,79
+1997,China,positive,0.816,Nicaragua,79
+1998,China,negative,0.23134328358208955,Brunei Darussalam Nicaragua Samoa,72
+1998,China,positive,0.7686567164179104,Swaziland,72
+1999,China,negative,0.23880597014925373,Gambia,105
+1999,China,positive,0.7611940298507462,Grenada,105
+2000,China,negative,0.2185430463576159,Dominica,85
+2000,China,positive,0.7814569536423841,Gambia,85
+2001,China,negative,0.2796208530805687,Palau Tuvalu,93
+2001,China,positive,0.7203791469194313,Swaziland,93
+2002,China,negative,0.25984251968503935,Saint Kitts and Nevis,61
+2002,China,positive,0.7401574803149606,Liberia Tuvalu,61
+2003,China,negative,0.26495726495726496,Dominica,55
+2003,China,positive,0.7350427350427351,Dominica Liberia Morocco Paraguay,55
+2004,China,negative,0.23809523809523808,Tuvalu,77
+2004,China,positive,0.7619047619047619,Central African Republic,77
+2005,China,negative,0.35714285714285715,Singapore,28
+2005,China,positive,0.6428571428571429,Saint Vincent and the Grenadines,28
+2006,China,negative,0.22857142857142856,UK Saint Vincent and the Grenadines,57
+2006,China,positive,0.7714285714285715,UK South Africa,57
+2007,China,negative,0.2682926829268293,Solomon Islands,38
+2007,China,positive,0.7317073170731707,Solomon Islands,38
+2008,China,negative,0.1791044776119403,Singapore,86
+2008,China,positive,0.8208955223880597,Singapore,86
+2009,China,negative,0.2441860465116279,Sao Tome and Principe,44
+2009,China,positive,0.7558139534883721,Solomon Islands,44
+2010,China,negative,0.32978723404255317,Niger,32
+2010,China,positive,0.6702127659574468,Yemen,32
+2011,China,negative,0.23529411764705882,Canada,36
+2011,China,positive,0.7647058823529411,Comoros Russia Solomon Islands Samoa Yemen,36
+2012,China,negative,0.16393442622950818,Indonesia,82
+2012,China,positive,0.8360655737704918,Burkina Faso Tuvalu,82
+2013,China,negative,0.1,Papua New Guinea,88
+2013,China,positive,0.9,Saint Kitts and Nevis,88
+2014,China,negative,0.1935483870967742,Philippines,95
+2014,China,positive,0.8064516129032258,Saint Kitts and Nevis,95
+2015,China,negative,0.15384615384615385,USA,90
+2015,China,positive,0.8461538461538461,Nepal Philippines,90
+1970,Russia,negative,0.4440677966101695,Albania,66
+1970,Russia,positive,0.5559322033898305,Albania,66
+1971,Russia,negative,0.34980988593155893,Albania,158
+1971,Russia,positive,0.6501901140684411,Belarus,158
+1972,Russia,negative,0.3864864864864865,Albania,168
+1972,Russia,positive,0.6135135135135135,Albania,168
+1973,Russia,negative,0.3763779527559055,Albania,157
+1973,Russia,positive,0.6236220472440945,Belarus,157
+1974,Russia,negative,0.3714902807775378,Albania,119
+1974,Russia,positive,0.6285097192224622,Belarus,119
+1975,Russia,negative,0.4085603112840467,Albania,94
+1975,Russia,positive,0.5914396887159533,Belarus,94
+1976,Russia,negative,0.4759493670886076,Chile,19
+1976,Russia,positive,0.5240506329113924,Belarus,19
+1977,Russia,negative,0.34511434511434513,Albania,149
+1977,Russia,positive,0.6548856548856549,Belarus,149
+1978,Russia,negative,0.4028169014084507,Belarus,69
+1978,Russia,positive,0.5971830985915493,Belarus,69
+1979,Russia,negative,0.39949748743718594,Albania,80
+1979,Russia,positive,0.6005025125628141,Belarus,80
+1980,Russia,negative,0.5208581644815257,Albania,-35
+1980,Russia,positive,0.4791418355184744,Belarus,-35
+1981,Russia,negative,0.49061032863849763,Albania,16
+1981,Russia,positive,0.5093896713615024,Mongolia,16
+1982,Russia,negative,0.45161290322580644,Albania,54
+1982,Russia,positive,0.5483870967741935,Ukraine,54
+1983,Russia,negative,0.5102611940298507,Paraguay,-22
+1983,Russia,positive,0.48973880597014924,Belarus,-22
+1984,Russia,negative,0.41735537190082644,Vietnam,120
+1984,Russia,positive,0.5826446280991735,Belarus,120
+1985,Russia,negative,0.3758169934640523,Belarus,152
+1985,Russia,positive,0.6241830065359477,Belarus,152
+1986,Russia,negative,0.39035769828926903,USA,141
+1986,Russia,positive,0.609642301710731,Belarus,141
+1987,Russia,negative,0.34547908232118757,Cambodia,229
+1987,Russia,positive,0.6545209176788124,USA,229
+1988,Russia,negative,0.3591549295774648,Belarus,200
+1988,Russia,positive,0.6408450704225352,Madagascar,200
+1989,Russia,negative,0.27717391304347827,Belarus,246
+1989,Russia,positive,0.7228260869565217,Belarus,246
+1990,Russia,negative,0.3382352941176471,Belarus,132
+1990,Russia,positive,0.6617647058823529,Belarus,132
+1991,Russia,negative,0.33480176211453744,Lithuania,225
+1991,Russia,positive,0.6651982378854625,Japan,225
+1992,Russia,negative,0.5121951219512195,Estonia,-9
+1992,Russia,positive,0.4878048780487805,Estonia,-9
+1993,Russia,negative,0.4572564612326044,Latvia,43
+1993,Russia,positive,0.5427435387673957,Latvia,43
+1994,Russia,negative,0.41132075471698115,Latvia,47
+1994,Russia,positive,0.5886792452830188,Georgia,47
+1995,Russia,negative,0.4596774193548387,USA,10
+1995,Russia,positive,0.5403225806451613,Moldova,10
+1996,Russia,negative,0.3258426966292135,Moldova Palau,31
+1996,Russia,positive,0.6741573033707865,Kyrgyzstan,31
+1997,Russia,negative,0.296,Hungary,51
+1997,Russia,positive,0.704,Moldova,51
+1998,Russia,negative,0.4845360824742268,Tajikistan,3
+1998,Russia,positive,0.5154639175257731,Austria,3
+1999,Russia,negative,0.5333333333333333,Georgia,-9
+1999,Russia,positive,0.4666666666666667,Georgia Kyrgyzstan,-9
+2000,Russia,negative,0.2676056338028169,Armenia,33
+2000,Russia,positive,0.7323943661971831,Tajikistan,33
+2001,Russia,negative,0.375,Syria,16
+2001,Russia,positive,0.625,Palestine,16
+2002,Russia,negative,0.5102040816326531,Georgia,-2
+2002,Russia,positive,0.4897959183673469,Georgia,-2
+2003,Russia,negative,0.5873015873015873,Cyprus Ukraine,-11
+2003,Russia,positive,0.4126984126984127,Georgia,-11
+2004,Russia,negative,0.7110091743119266,Georgia,-92
+2004,Russia,positive,0.2889908256880734,Dominican Republic,-92
+2005,Russia,negative,0.5714285714285714,Equatorial Guinea,-3
+2005,Russia,positive,0.42857142857142855,Mongolia,-3
+2006,Russia,negative,0.5263157894736842,Georgia,-4
+2006,Russia,positive,0.47368421052631576,Georgia,-4
+2007,Russia,negative,0.5681818181818182,Georgia,-6
+2007,Russia,positive,0.4318181818181818,Georgia,-6
+2008,Russia,negative,0.4634146341463415,Singapore,6
+2008,Russia,positive,0.5365853658536586,France Palestine Syria,6
+2009,Russia,negative,0.23333333333333334,Uzbekistan,32
+2009,Russia,positive,0.7666666666666667,Denmark Zimbabwe,32
+2010,Russia,negative,0.4523809523809524,Georgia,12
+2010,Russia,positive,0.5476190476190477,Georgia,12
+2011,Russia,negative,0.5492957746478874,Georgia,-7
+2011,Russia,positive,0.4507042253521127,Georgia,-7
+2012,Russia,negative,0.4,Georgia,16
+2012,Russia,positive,0.6,Georgia,16
+2013,Russia,negative,0.3826086956521739,Georgia,54
+2013,Russia,positive,0.6173913043478261,Georgia,54
+2014,Russia,negative,0.5102040816326531,Albania,-4
+2014,Russia,positive,0.4897959183673469,Georgia,-4
+2015,Russia,negative,0.5549738219895288,Ukraine,-21
+2015,Russia,positive,0.44502617801047123,Ukraine,-21
+1970,USA,negative,0.44320987654320987,Albania,460
+1970,USA,positive,0.5567901234567901,Albania,460
+1971,USA,negative,0.45723195723195725,Albania,576
+1971,USA,positive,0.5427680427680428,Albania,576
+1972,USA,negative,0.4755323649696799,Albania,347
+1972,USA,positive,0.5244676350303201,Albania,347
+1973,USA,negative,0.4467965001411233,Albania,754
+1973,USA,positive,0.5532034998588766,Albania,754
+1974,USA,negative,0.4212866884079455,Cuba,1062
+1974,USA,positive,0.5787133115920545,Dominican Republic,1062
+1975,USA,negative,0.4325703680791834,Albania,872
+1975,USA,positive,0.5674296319208165,Albania,872
+1976,USA,negative,0.4594559416894442,Cuba,623
+1976,USA,positive,0.5405440583105557,Panama,623
+1977,USA,negative,0.4343090537780803,China,965
+1977,USA,positive,0.5656909462219196,Grenada,965
+1978,USA,negative,0.44344588522275,Benin,881
+1978,USA,positive,0.5565541147772499,Grenada,881
+1979,USA,negative,0.44805422461142924,Albania,889
+1979,USA,positive,0.5519457753885708,Albania,889
+1980,USA,negative,0.46273087071240104,Albania,678
+1980,USA,positive,0.537269129287599,Panama,678
+1981,USA,negative,0.49100780454699694,Iran,159
+1981,USA,positive,0.508992195453003,Panama,159
+1982,USA,negative,0.4983017420839268,Iran,31
+1982,USA,positive,0.5016982579160731,Panama,31
+1983,USA,negative,0.5039054470709147,Cuba,-76
+1983,USA,positive,0.49609455292908533,Belarus Cuba,-76
+1984,USA,negative,0.47599329586907224,Cuba Iran,487
+1984,USA,positive,0.5240067041309278,Russia,487
+1985,USA,negative,0.4765643587913395,Cuba,394
+1985,USA,positive,0.5234356412086605,Guatemala,394
+1986,USA,negative,0.5064565809738183,Cuba,-109
+1986,USA,positive,0.4935434190261817,Cabo Verde,-109
+1987,USA,negative,0.4470532432111941,Iran,893
+1987,USA,positive,0.5529467567888059,Cuba,893
+1988,USA,negative,0.41478292070326517,Panama,1425
+1988,USA,positive,0.5852170792967348,El Salvador,1425
+1989,USA,negative,0.44373593398349587,Panama,900
+1989,USA,positive,0.5562640660165041,Côte d'Ivoire,900
+1990,USA,negative,0.430566330488751,Iraq,895
+1990,USA,positive,0.5694336695112491,Guatemala,895
+1991,USA,negative,0.3979498164014688,Cuba,1334
+1991,USA,positive,0.6020501835985312,Myanmar,1334
+1992,USA,negative,0.41906721536351166,Cuba,944
+1992,USA,positive,0.5809327846364883,Australia,944
+1993,USA,negative,0.4045136186770428,Iraq,1227
+1993,USA,positive,0.5954863813229572,Bahrain,1227
+1994,USA,negative,0.3861220771333131,Croatia,1500
+1994,USA,positive,0.613877922866687,Qatar,1500
+1995,USA,negative,0.38372283052786405,Iran,1423
+1995,USA,positive,0.616277169472136,Iran,1423
+1996,USA,negative,0.4101096024865042,Iran,1099
+1996,USA,positive,0.5898903975134958,Egypt,1099
+1997,USA,negative,0.3786112519006589,Cuba,1437
+1997,USA,positive,0.6213887480993411,Tunisia,1437
+1998,USA,negative,0.42821606254442074,Cuba,808
+1998,USA,positive,0.5717839374555792,Austria,808
+1999,USA,negative,0.43116364241717997,Cuba,827
+1999,USA,positive,0.56883635758282,Cuba,827
+2000,USA,negative,0.41643727880456155,Iraq,850
+2000,USA,positive,0.5835627211954385,Liberia Namibia,850
+2001,USA,negative,0.49782567593117794,Cuba,23
+2001,USA,positive,0.5021743240688221,Palestine,23
+2002,USA,negative,0.44552058111380144,Iraq,495
+2002,USA,positive,0.5544794188861986,Egypt,495
+2003,USA,negative,0.433904927284567,Syria,609
+2003,USA,positive,0.566095072715433,Senegal,609
+2004,USA,negative,0.45945335441608315,North Korea,359
+2004,USA,positive,0.5405466455839169,Argentina,359
+2005,USA,negative,0.4176334106728538,Senegal,568
+2005,USA,positive,0.5823665893271461,Senegal,568
+2006,USA,negative,0.4324193157000728,North Korea Venezuela,557
+2006,USA,positive,0.5675806842999273,Georgia,557
+2007,USA,negative,0.4030801911842804,Iran,730
+2007,USA,positive,0.5969198088157196,Iran,730
+2008,USA,negative,0.4280796656011802,Iran,585
+2008,USA,positive,0.5719203343988197,Tunisia,585
+2009,USA,negative,0.42534036012296883,Cuba,680
+2009,USA,positive,0.5746596398770312,Jordan,680
+2010,USA,negative,0.3871832358674464,Cuba,926
+2010,USA,positive,0.6128167641325536,Vatican,926
+2011,USA,negative,0.40630105017502915,Iran,803
+2011,USA,positive,0.5936989498249708,Chile China Pakistan,803
+2012,USA,negative,0.4224661831013527,Argentina,791
+2012,USA,positive,0.5775338168986474,Saint Vincent and the Grenadines,791
+2013,USA,negative,0.38972542072630645,Georgia,996
+2013,USA,positive,0.6102745792736936,Chile,996
+2014,USA,negative,0.43797294198578307,Palestine,541
+2014,USA,positive,0.5620270580142169,Saint Lucia,541
+2015,USA,negative,0.4205025572603958,Ukraine,715
+2015,USA,positive,0.5794974427396041,Mali,715
+1970,UK,negative,0.4861111111111111,Cambodia,8
+1970,UK,positive,0.5138888888888888,Ukraine,8
+1971,UK,negative,0.5011820330969267,Democratic Yemen,-1
+1971,UK,positive,0.4988179669030733,Ukraine,-1
+1972,UK,negative,0.5178875638841567,Ukraine,-21
+1972,UK,positive,0.48211243611584326,Ukraine,-21
+1973,UK,negative,0.48411214953271026,Spain,17
+1973,UK,positive,0.5158878504672897,Turkey,17
+1974,UK,negative,0.49286640726329445,Cyprus,11
+1974,UK,positive,0.5071335927367056,Turkey,11
+1975,UK,negative,0.4533898305084746,Cyprus,44
+1975,UK,positive,0.5466101694915254,Cyprus,44
+1976,UK,negative,0.470703125,Cyprus,30
+1976,UK,positive,0.529296875,Turkey,30
+1977,UK,negative,0.4279749478079332,Cyprus,69
+1977,UK,positive,0.5720250521920668,Ireland,69
+1978,UK,negative,0.44863731656184486,Guatemala,49
+1978,UK,positive,0.5513626834381551,Turkey,49
+1979,UK,negative,0.46987951807228917,Cyprus,30
+1979,UK,positive,0.5301204819277109,Turkey,30
+1980,UK,negative,0.3822525597269625,Mozambique Ukraine,69
+1980,UK,positive,0.6177474402730375,Ukraine,69
+1981,UK,negative,0.47790055248618785,Turkey,16
+1981,UK,positive,0.5220994475138122,Turkey,16
+1982,UK,negative,0.5088566827697263,Argentina,-11
+1982,UK,positive,0.49114331723027377,Argentina,-11
+1983,UK,negative,0.5012594458438288,Argentina,-1
+1983,UK,positive,0.4987405541561713,Argentina,-1
+1984,UK,negative,0.5,Ukraine,0
+1984,UK,positive,0.5,Turkey,0
+1985,UK,negative,0.5542372881355933,Argentina,-64
+1985,UK,positive,0.4457627118644068,Ukraine,-64
+1986,UK,negative,0.4393203883495146,Cyprus,50
+1986,UK,positive,0.5606796116504854,Ukraine,50
+1987,UK,negative,0.4221698113207547,Cyprus,66
+1987,UK,positive,0.5778301886792453,Ukraine,66
+1988,UK,negative,0.36156351791530944,Turkey,85
+1988,UK,positive,0.6384364820846905,Turkey Ukraine,85
+1989,UK,negative,0.4253393665158371,Turkey,66
+1989,UK,positive,0.5746606334841629,Turkey,66
+1990,UK,negative,0.5111940298507462,Ukraine,-6
+1990,UK,positive,0.48880597014925375,Ukraine,-6
+1991,UK,negative,0.3231850117096019,Ukraine,151
+1991,UK,positive,0.6768149882903981,Ukraine,151
+1992,UK,negative,0.35764705882352943,Ukraine,121
+1992,UK,positive,0.6423529411764706,Ukraine,121
+1993,UK,negative,0.40784982935153585,Ukraine,108
+1993,UK,positive,0.5921501706484642,Ukraine,108
+1994,UK,negative,0.35799522673031026,Ukraine,119
+1994,UK,positive,0.6420047732696897,Ukraine,119
+1995,UK,negative,0.3717948717948718,Ukraine,100
+1995,UK,positive,0.6282051282051282,Ukraine,100
+1996,UK,negative,0.418013856812933,Cyprus,71
+1996,UK,positive,0.581986143187067,Ukraine,71
+1997,UK,negative,0.329153605015674,Iraq,218
+1997,UK,positive,0.670846394984326,Ukraine,218
+1998,UK,negative,0.3373015873015873,Cyprus,164
+1998,UK,positive,0.6626984126984127,Ukraine,164
+1999,UK,negative,0.4785992217898833,Iraq,22
+1999,UK,positive,0.5214007782101168,Ukraine,22
+2000,UK,negative,0.389937106918239,Iraq,70
+2000,UK,positive,0.610062893081761,Ukraine,70
+2001,UK,negative,0.5145631067961165,Ukraine,-12
+2001,UK,positive,0.4854368932038835,Turkmenistan,-12
+2002,UK,negative,0.4637223974763407,Ukraine,23
+2002,UK,positive,0.5362776025236593,Ukraine,23
+2003,UK,negative,0.5048076923076923,Ukraine,-2
+2003,UK,positive,0.4951923076923077,Ukraine,-2
+2004,UK,negative,0.42765273311897106,Ukraine,45
+2004,UK,positive,0.572347266881029,Turkmenistan Turkey,45
+2005,UK,negative,0.46296296296296297,Ukraine,20
+2005,UK,positive,0.5370370370370371,Turkey,20
+2006,UK,negative,0.35185185185185186,Ukraine,96
+2006,UK,positive,0.6481481481481481,Turkmenistan,96
+2007,UK,negative,0.38080495356037153,Burkina Faso,77
+2007,UK,positive,0.6191950464396285,Turkmenistan,77
+2008,UK,negative,0.3987915407854985,Ukraine,67
+2008,UK,positive,0.6012084592145015,Turkmenistan Turkey,67
+2009,UK,negative,0.31545741324921134,Turkey,117
+2009,UK,positive,0.6845425867507886,Turkey,117
+2010,UK,negative,0.45566502463054187,Turkey,36
+2010,UK,positive,0.5443349753694581,Ukraine,36
+2011,UK,negative,0.48187633262260127,Cyprus,17
+2011,UK,positive,0.5181236673773987,Burkina Faso,17
+2012,UK,negative,0.36088709677419356,Ukraine,138
+2012,UK,positive,0.6391129032258065,Ukraine,138
+2013,UK,negative,0.3135593220338983,Ukraine,176
+2013,UK,positive,0.6864406779661016,Ukraine,176
+2014,UK,negative,0.4621026894865526,Russia,62
+2014,UK,positive,0.5378973105134475,Burkina Faso,62
+2015,UK,negative,0.488245931283906,Ukraine,13
+2015,UK,positive,0.5117540687160941,Ukraine,13
+1970,China,negative,0.27450980392156865,Somalia,23
+1970,China,positive,0.7254901960784313,Somalia,23
+1971,China,negative,0.4161490683229814,Peru,27
+1971,China,positive,0.5838509316770186,Kenya,27
+1972,China,negative,0.3894736842105263,Tunisia,21
+1972,China,positive,0.6105263157894737,Somalia,21
+1973,China,negative,0.31851851851851853,Ecuador,49
+1973,China,positive,0.6814814814814815,Madagascar,49
+1974,China,negative,0.2553191489361702,Germany,23
+1974,China,positive,0.7446808510638298,Mali,23
+1975,China,negative,0.42016806722689076,Libya Somalia,19
+1975,China,positive,0.5798319327731093,Somalia,19
+1976,China,negative,0.507537688442211,Zambia,-3
+1976,China,positive,0.49246231155778897,Somalia,-3
+1977,China,negative,0.3609467455621302,Angola,47
+1977,China,positive,0.6390532544378699,Côte d'Ivoire,47
+1978,China,negative,0.2978723404255319,Canada Chile Côte d'Ivoire Dominican Republic Togo,19
+1978,China,positive,0.7021276595744681,Côte d'Ivoire,19
+1979,China,negative,0.5,Libya,0
+1979,China,positive,0.5,Libya,0
+1980,China,negative,0.2894736842105263,Germany Cambodia Senegal,16
+1980,China,positive,0.7105263157894737,Chad,16
+1981,China,negative,0.288135593220339,Cuba,50
+1981,China,positive,0.711864406779661,Cuba Guinea-Bissau Saint Lucia Papua New Guinea,50
+1982,China,negative,0.3382352941176471,DR Congo,22
+1982,China,positive,0.6617647058823529,Malta,22
+1983,China,negative,0.42857142857142855,Iran,20
+1983,China,positive,0.5714285714285714,Iran Vanuatu,20
+1984,China,negative,0.32142857142857145,Papua New Guinea,50
+1984,China,positive,0.6785714285714286,Papua New Guinea,50
+1985,China,negative,0.46511627906976744,Australia Samoa,9
+1985,China,positive,0.5348837209302325,Papua New Guinea,9
+1986,China,negative,0.4583333333333333,Papua New Guinea,12
+1986,China,positive,0.5416666666666666,Papua New Guinea,12
+1987,China,negative,0.5132743362831859,Papua New Guinea,-3
+1987,China,positive,0.48672566371681414,Papua New Guinea Vanuatu,-3
+1988,China,negative,0.3037974683544304,Papua New Guinea,31
+1988,China,positive,0.6962025316455697,Vanuatu,31
+1989,China,negative,0.310126582278481,Saint Lucia,60
+1989,China,positive,0.689873417721519,Cambodia,60
+1990,China,negative,0.22857142857142856,Solomon Islands,76
+1990,China,positive,0.7714285714285715,Solomon Islands,76
+1991,China,negative,0.2,Solomon Islands,75
+1991,China,positive,0.8,Solomon Islands,75
+1992,China,negative,0.3333333333333333,Iraq,24
+1992,China,positive,0.6666666666666666,Luxembourg,24
+1993,China,negative,0.17777777777777778,Belgium Libya,58
+1993,China,positive,0.8222222222222222,Mauritius,58
+1994,China,negative,0.21818181818181817,Comoros,62
+1994,China,positive,0.7818181818181819,Comoros Cambodia,62
+1995,China,negative,0.41530054644808745,Samoa,31
+1995,China,positive,0.5846994535519126,Canada,31
+1996,China,negative,0.25925925925925924,Pakistan,52
+1996,China,positive,0.7407407407407407,Central African Republic,52
+1997,China,negative,0.2077922077922078,Canada,45
+1997,China,positive,0.7922077922077922,Guinea Madagascar,45
+1998,China,negative,0.24691358024691357,Suriname Uruguay,41
+1998,China,positive,0.7530864197530864,Canada,41
+1999,China,negative,0.3064516129032258,Canada,24
+1999,China,positive,0.6935483870967742,Comoros,24
+2000,China,negative,0.2714285714285714,Afghanistan Canada Iraq Mauritius,32
+2000,China,positive,0.7285714285714285,Comoros,32
+2001,China,negative,0.375,Sao Tome and Principe,16
+2001,China,positive,0.625,Comoros,16
+2002,China,negative,0.27586206896551724,Mauritius,13
+2002,China,positive,0.7241379310344828,Comoros,13
+2003,China,negative,0.3142857142857143,Cambodia,13
+2003,China,positive,0.6857142857142857,Côte d'Ivoire,13
+2004,China,negative,0.18811881188118812,Greece,63
+2004,China,positive,0.8118811881188119,Central African Republic,63
+2005,China,negative,0.23529411764705882,Mauritius,36
+2005,China,positive,0.7647058823529411,Mauritius,36
+2006,China,negative,0.22,Canada,56
+2006,China,positive,0.78,Canada,56
+2007,China,negative,0.3,Comoros,28
+2007,China,positive,0.7,Yugoslavia,28
+2008,China,negative,0.24113475177304963,Comoros,73
+2008,China,positive,0.7588652482269503,Comoros,73
+2009,China,negative,0.25862068965517243,Comoros Mauritius,28
+2009,China,positive,0.7413793103448276,Albania,28
+2010,China,negative,0.25,Comoros,28
+2010,China,positive,0.75,Comoros,28
+2011,China,negative,0.38596491228070173,Comoros,13
+2011,China,positive,0.6140350877192983,Vanuatu,13
+2012,China,negative,0.2727272727272727,Vanuatu,25
+2012,China,positive,0.7272727272727273,Comoros,25
+2013,China,negative,0.25274725274725274,Comoros,45
+2013,China,positive,0.7472527472527473,Comoros,45
+2014,China,negative,0.2786885245901639,Canada,81
+2014,China,positive,0.7213114754098361,Canada,81
+2015,China,negative,0.2751677852348993,Comoros,67
+2015,China,positive,0.7248322147651006,Vanuatu,67
