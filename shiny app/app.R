@@ -559,14 +559,19 @@ server <- function(input, output) {
    })
    
    output$barPlot <- renderPlot({
-     ggplot(data = sec_counc_words_R1(), aes(word, tf)) +
-       geom_col(show.legend = FALSE) +
+       ggplot(data = sec_counc_words_R1(), aes(word, freqword,label=word)) +
+       geom_col(fill="#5b92e5",color="#5b92e5") +
+       xlab(NULL) +
+       ylab(NULL) +
+       geom_text(size = 5, position = position_stack(vjust = 0.5),
+                 color="white",fontface = "bold") +
        coord_flip() +
        xlab("Count") +
        ylab("Word") +
        theme_bw() +
-       theme(legend.position = "bottom",
-             panel.grid.minor.y = element_blank())
+       theme(axis.title.y=element_blank(),
+             axis.text.y=element_blank(),
+             axis.ticks.y=element_blank())
    })
   
   #### wordcloud #####
