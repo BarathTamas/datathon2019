@@ -114,7 +114,7 @@ ui <- dashboardPage(
                                  selectize = TRUE),
                      
                      sliderInput(inputId = "year",
-                                 label = HTML('<p style="color:black;">Select Year:</p>'),
+                                 label = HTML('<p style="color:black;">Select Year for Wordcloud:</p>'),
                                  min = 1970,
                                  max = 2015,
                                  value = 2015,
@@ -122,11 +122,14 @@ ui <- dashboardPage(
                                  sep = ""),
                      
                      knobInput(inputId = "maxWordsCloud",
-                               label = HTML('<p style="color:black;">Select Number of Words in Cloud:</p>'),
+                               label = HTML('<p style="color:black;">Number of Words in Cloud:</p>'),
                                value = 20,
                                min = 3,
                                max = 50,
-                               displayPrevious = TRUE, 
+                               width = "100%",
+                               height = "100%",
+                               displayPrevious = TRUE,
+                               immediate = FALSE,
                                lineCap = "round",
                                fgColor = "#5b92e5",
                                inputColor = "#5b92e5"
@@ -443,7 +446,7 @@ server <- function(input, output) {
       subtitle = paste0("is the Sentiment Index in ", input$year), 
       value = "WIP",
       icon = icon("heartbeat", lib = "font-awesome"),
-      color = "navy"
+      color = "light-blue"
     )
   })
   
@@ -463,7 +466,7 @@ server <- function(input, output) {
       subtitle = paste0("Mentioned ", input$country," the most positively in ", input$year), 
       value = paste0(sentimentPercPos()*100, "%"),
       icon = icon("thumbs-up", lib = "glyphicon"),
-      color = "blue"
+      color = "olive"
     )
   })
   
@@ -483,7 +486,7 @@ server <- function(input, output) {
       subtitle = paste0("Mentioned ",  input$country," the most negatively in ", input$year), 
       value = paste0(sentimentPercNeg()*100, "%"),
       icon = icon("thumbs-down", lib = "glyphicon"),
-      color = "light-blue"
+      color = "red"
     )
   })
   
@@ -494,8 +497,9 @@ server <- function(input, output) {
   })
   
   output$linePlot <- renderHighchart({
-    hchart(sec_counc_count_R()[,1:2], type = "line", hcaes(x=year, y=count), name = "Frequency") %>% 
-      hc_add_theme(hc_theme_smpl()) %>% 
+    hchart(sec_counc_count_R()[,1:2], type = "line", hcaes(x = year, y = count), name = "Frequency") %>% 
+      hc_add_theme(hc_theme_smpl()) %>%
+      hc_plotOptions(line = list(color = "deepskyblue")) %>% 
       hc_xAxis(title = list(text = "Year")) %>% 
       hc_yAxis(title = list(text = "Frequency"))
   })
