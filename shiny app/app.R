@@ -277,7 +277,8 @@ ui <- dashboardPage(
                     
                     bsModal(id = "wordquote",
                             title = "Quote(s) in which the word appeared",
-                            trigger = "lookup"
+                            trigger = "lookup",
+                            withSpinner(tableOutput("text"))
                     )
                 )
               )
@@ -447,19 +448,23 @@ server <- function(input, output) {
   
   ### text window ####
   buttonText <- eventReactive(c(input$lookup),{
-    "display this text"
-    # read.table("country_codes.csv", header = TRUE, stringsAsFactors = FALSE) %>% #temporarily here only!
-    #   filter(country=input$userCountry)
-    #   filter(grepl(nearPoints(global$filteredWords, input$plot1_click)[1,"word"],sentence)) %>% 
-    #   select(sentence)
+    
+    read.table("sentences_filtered.csv", header = TRUE, stringsAsFactors = FALSE) %>% #temporarily here only!
+      left_join(country_codes) %>%
+      mutate(country=fullname) %>% 
+      filter(country==input$userCountry) %>%
+      filter(grepl("israel",sentence)) %>%
+      select(sentence) %>% 
+      as.data.frame()
     
   })
   
-  output$text <- renderText({
+  output$text <- renderTable({
     
-    buttonText
+    buttonText()
     
   })
+  
   
   #### DB 2 ####
   
