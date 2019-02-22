@@ -87,7 +87,7 @@ ui <- dashboardPage(
                      
                      pickerInput(
                        inputId = "selectedWords",
-                       label = "Which words should be plotted?",
+                       label = "Select words to plot:",
                        choices = trending_words$word,
                        selected = c("arab","israel","arms","middle","force,"),
                        options = pickerOptions(
@@ -203,9 +203,8 @@ ui <- dashboardPage(
                 box(title = "Heatmap Displaying Clusters of Correlated Word Trends",
                     status = "info",
                     width = 5,
-                    height = "550px",
+                    height = "520px",
                     solidHeader = TRUE,
-                    
                     
                     withSpinner(plotOutput("corrPlot"))
                     
@@ -214,10 +213,11 @@ ui <- dashboardPage(
                 box(title = "Frequency of Selected Words Over Time (click points for more information)",
                     status = "info",
                     width = 7,
-                    height = "550px",
+                    height = "520px",
                     solidHeader = TRUE,
                     
                     withSpinner(plotOutput("wordsOverTime", click = "plot1_click"))
+                    
                 )
               ),
               
@@ -231,7 +231,8 @@ ui <- dashboardPage(
                     withSpinner(tableOutput("click_info"))
                     
                 )
-              ),  
+              ),
+              
               fluidRow(
                   
                 box(title = "Frequency by Country (Top Users)",
@@ -344,14 +345,14 @@ server <- function(input, output) {
       theme_bw() +
       theme(legend.position = "bottom",
             panel.grid.minor.y = element_blank())
-  }, height = 490, width = 735)
+  }, height = 450, width = 700)
   
   output$corrPlot <- renderPlot({
     
     pal <- colorRampPalette(rev(brewer.pal(11, "RdYlBu")))(100)
     pheatmap(word_corrs, color = pal, treeheight_row = 0, treeheight_col = 0)
     
-  }, height = 490, width = 520)
+  }, height = 450, width = 480)
   
   #### click ####
   
