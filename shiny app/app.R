@@ -18,6 +18,7 @@ library(Cairo)
 library(RColorBrewer)
 library(pheatmap)
 library(ggwordcloud)
+library(highcharter)
 
 # shiny dashboard -----------------------------------------------------------------------------
 
@@ -294,7 +295,7 @@ ui <- dashboardPage(
                     width = 6,
                     solidHeader = TRUE,
                     
-                    withSpinner(plotOutput("linePlot", click = "plot2_click"))
+                    withSpinner(highchartOutput("linePlot")) #, click = "plot2_click"))
                     
                 ),
                 
@@ -485,15 +486,22 @@ server <- function(input, output) {
       filter(country == input$country)
   })
   
-  output$linePlot <- renderPlot({
-    ggplot(data = sec_counc_count_R(), aes(year, count)) + 
-      geom_line() +
-      xlab("Year") +
-      ylab("Count") +
-      theme_bw() +
-      theme(legend.position = "bottom",
-            panel.grid.minor.y = element_blank())
+  output$linePlot <- renderHighchart({
+    hchart(sec_counc_count_R()[,1:2], type = "line", hcaes(x=year, y=count), name = "Frequency") %>% 
+      hc_add_theme(hc_theme_smpl()) %>% 
+      hc_xAxis(title = list(text = "Year")) %>% 
+      hc_yAxis(title = list(text = "Frequency"))
   })
+  
+  # output$linePlot <- renderPlot({
+  #   ggplot(data = sec_counc_count_R(), aes(year, count)) + 
+  #     geom_line() +
+  #     xlab("Year") +
+  #     ylab("Count") +
+  #     theme_bw() +
+  #     theme(legend.position = "bottom",
+  #           panel.grid.minor.y = element_blank())
+  # })
   
   # # barplot
   # 
