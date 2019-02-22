@@ -126,17 +126,17 @@ ui <- dashboardPage(
                      #             sep = ""),
                      
                      knobInput(inputId = "maxWordsCloud",
-                               label = HTML('<p style="color:black;">Number of Words in Cloud:</p>'),
-                               value = 45,
+                               label = HTML('<p style="color:black;">Fill Wordcloud:</p>'),
+                               value = 50,
                                min = 3,
-                               max = 60,
+                               max = 80,
                                width = "100%",
-                               height = "90%",
+                               height = "80%",
                                displayPrevious = TRUE,
                                immediate = FALSE,
                                lineCap = "round",
                                fgColor = "#5b92e5",
-                               inputColor = "#5b92e5"
+                               inputColor = "#ffffff"
                      )
     ),
     
@@ -498,15 +498,14 @@ server <- function(input, output) {
     
     sentiment_data %>%
       filter(year == input$year & country == input$country & sentiment == "positive") %>% 
-      select(proportionsentiment) %>% 
-      mutate(proportionsentiment = round(proportionsentiment, 2))
+      select(proportionsentiment2)
     
   })
   
   output$testInfo2 <- renderValueBox({
     valueBox(
       subtitle = paste0("Mentioned ", input$country," the most positively in ", input$year), 
-      value = paste0(sentimentPercPos()*100, "%"),
+      value = sentimentPercPos(),
       icon = icon("thumbs-up", lib = "glyphicon"),
       color = "olive"
     )
@@ -520,15 +519,14 @@ server <- function(input, output) {
     
     sentiment_data %>%
       filter(year == input$year & country == input$country & sentiment == "negative") %>% 
-      select(proportionsentiment) %>% 
-      mutate(proportionsentiment = round(proportionsentiment, 2))
+      select(proportionsentiment2)
     
   })
   
   output$testInfo3 <- renderValueBox({
     valueBox(
       subtitle = paste0("Mentioned ",  input$country," the most negatively in ", input$year), 
-      value = paste0(sentimentPercNeg()*100, "%"),
+      value = sentimentPercNeg(),
       icon = icon("thumbs-down", lib = "glyphicon"),
       color = "red"
     )
@@ -586,14 +584,15 @@ server <- function(input, output) {
   #### wordcloud #####
   
   sec_counc_words_R2 <- reactive({sec_counc_words %>%
-      mutate(angle = 45 * sample(-2:2, n(), replace = TRUE, prob = c(1, 1, 4, 1, 1))) %>% 
+      # mutate(angle = 90 * sample(c(0, 1), n(), replace = TRUE, prob = c(60, 40))) %>% 
+      mutate(angle = 45 * sample(-2:2, n(), replace = TRUE, prob = c(1, 1, 4, 1, 1))) %>%
       filter(country == input$country, year == input$year) %>%
       top_n(n = input$maxWordsCloud, wt = freqword)
   })
   
   output$wordcloud <- renderPlot({
     
-    ggplot(sec_counc_words_R2(), aes(label = word, 
+    ggplot(sec_counc_words_R2(), aes(label = word,
                                      size = freqword,
                                      color = freqword,
                                      angle = angle,
@@ -601,8 +600,10 @@ server <- function(input, output) {
            rm_outside = TRUE) +
       scale_color_gradient(low = "lightgray", high = "deepskyblue") +
       geom_text_wordcloud_area(shape = "diamond", 
-                               eccentricity = 0.8) +
-      scale_size_area(max_size = 24) +
+                               eccentricity = 1,
+                               seed = 123,
+                               rm_outside = TRUE) +
+      scale_size_area(max_size = 28) +
       theme_minimal()
     
   })
