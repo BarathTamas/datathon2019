@@ -50,7 +50,7 @@ sec_counc_count <- read.csv("securitycouncil_count.csv", header = TRUE, stringsA
 
 sec_counc_words <- read.csv("securitycouncil_words.csv", header = TRUE, stringsAsFactors = FALSE)
 
-sentiment_data <- read.csv("china_sentiment_wrong.csv", header = TRUE, stringsAsFactors = FALSE)
+sentiment_data <- read.csv("securitycouncil_sentiment.csv", header = TRUE, stringsAsFactors = FALSE)
 
 # ui ------------------------------------------------------------------------------------------
 
@@ -124,8 +124,8 @@ ui <- dashboardPage(
                                value = 20,
                                min = 3,
                                max = 50,
-                               width = "100%",
-                               height = "100%",
+                               width = "85%",
+                               height = "85%",
                                displayPrevious = TRUE,
                                immediate = FALSE,
                                lineCap = "round",
@@ -352,6 +352,8 @@ server <- function(input, output) {
     countries = NULL
   )
   
+  #### word plot ####
+  
   pp <- eventReactive(c(input$refreshWords),{
     global$filteredWords <- words_ts %>% filter(word %in% input$selectedWords) 
     global$filteredWords %>% 
@@ -382,6 +384,7 @@ server <- function(input, output) {
     
     pal <- colorRampPalette(rev(brewer.pal(11, "RdYlBu")))(100)
     #pheatmap(word_corrs, color = pal, treeheight_row = 0, treeheight_col = 0)
+<<<<<<< HEAD
     hc <- hchart(as.matrix(word_corrs_ordered)) %>%
       hc_size(height = 450, width = 480)
       
@@ -390,6 +393,15 @@ server <- function(input, output) {
     hc %>% 
       hc_colorAxis(stops = color_stops(11, colors=pal))
     
+=======
+    
+    
+      hchart(as.matrix(word_corrs_ordered)) %>%
+      hc_size(height = 450, width = 480) %>%
+      hc_colorAxis(stops = color_stops(10, rev(RColorBrewer::brewer.pal(10, "RdYlBu")))) %>%
+      hc_xAxis(tickmount = 50) %>%
+      hc_yAxis(tickmount = 50)
+>>>>>>> 12bc53ce4289e66de55bb6fef9491f72869282eb
     
   }
   #, height = 450, width = 480
@@ -440,19 +452,19 @@ server <- function(input, output) {
   
   # sentiment index
   
-  # sentimentScore <- reactive({
-  #   
-  #   sentiment_data %>%
-  #     filter(year == input$year & country == input$country) %>% 
-  #     select(proportionsentiment) %>% 
-  #     mutate(proportionsentiment = round(proportionsentiment, 2))
-  #     
-  # })
+  sentimentScore <- reactive({
+
+    sentiment_data %>%
+      filter(year == input$year & country == input$country) %>%
+      select(totalscore) %>%
+      mutate(totalscore = round(totalscore, 2))
+
+  })
   
   output$testInfo1 <- renderValueBox({
     valueBox(
-      subtitle = paste0("is the Sentiment Index in ", input$year), 
-      value = "WIP",
+      subtitle = paste0("is the Sentiment Index of ", input$country, " in ", input$year), 
+      value = sentimentScore(),
       icon = icon("heartbeat", lib = "font-awesome"),
       color = "light-blue"
     )
@@ -460,19 +472,18 @@ server <- function(input, output) {
   
   # mentiod the most positively by
   
-  sentimentPercPos <- reactive({
+  sentimentCountryPos <- reactive({
     
     sentiment_data %>%
       filter(year == input$year & country == input$country & sentiment == "positive") %>% 
-      select(proportionsentiment) %>% 
-      mutate(proportionsentiment = round(proportionsentiment, 2))
+      select(othercountries)
     
   })
   
   output$testInfo2 <- renderValueBox({
     valueBox(
       subtitle = paste0("Mentioned ", input$country," the most positively in ", input$year), 
-      value = paste0(sentimentPercPos()*100, "%"),
+      value = sentimentCountryPos(),
       icon = icon("thumbs-up", lib = "glyphicon"),
       color = "olive"
     )
@@ -480,19 +491,18 @@ server <- function(input, output) {
   
   # mentiod the most negatively by
   
-  sentimentPercNeg <- reactive({
+  sentimentCountryNeg <- reactive({
     
     sentiment_data %>%
       filter(year == input$year & country == input$country & sentiment == "negative") %>% 
-      select(proportionsentiment) %>% 
-      mutate(proportionsentiment = round(proportionsentiment, 2))
+      select(othercountries)
     
   })
   
   output$testInfo3 <- renderValueBox({
     valueBox(
       subtitle = paste0("Mentioned ",  input$country," the most negatively in ", input$year), 
-      value = paste0(sentimentPercNeg()*100, "%"),
+      value = sentimentCountryNeg(),
       icon = icon("thumbs-down", lib = "glyphicon"),
       color = "red"
     )
