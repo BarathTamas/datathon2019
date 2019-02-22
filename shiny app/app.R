@@ -15,6 +15,7 @@ library(RColorBrewer)
 library(pheatmap)
 library(ggwordcloud)
 library(highcharter)
+library(htmlTable)
 
 # shiny dashboard -----------------------------------------------------------------------------
 
@@ -38,6 +39,7 @@ session_info <- read.table("session_info.csv", header = TRUE, stringsAsFactors =
 date_country_word <- read.table("date_country_word.csv", header = TRUE, stringsAsFactors = FALSE)
 
 country_codes <- read.table("country_codes.csv", header = TRUE, stringsAsFactors = FALSE)
+sentences <- read.table("sentences_filtered.csv", header = TRUE, stringsAsFactors = FALSE)
 
 # dashboard 2
 
@@ -255,11 +257,15 @@ ui <- dashboardPage(
                       "lookup", "Lookup"
                     ),
                     
+                    tags$head(tags$style(".modal-dialog{ width:1500px}")),
+                    tags$head(tags$style(".modal-body{ min-height:700px}")),
+                    
                     bsModal(id = "wordquote",
                             title = "Quote(s) in which the word appeared",
                             trigger = "lookup",
-                            withSpinner(tableOutput("text"))
-                    )
+                            withSpinner(htmlTableWidgetOutput("text"))
+                    ),
+                    tags$head(tags$style("#wordquote .modal-footer{ display:none}"))
                 )
               )
       ),
@@ -280,7 +286,7 @@ ui <- dashboardPage(
               
               fluidRow(
                 
-                box(title = "Line Plot",
+                box(title = "Number of Mentions of Selected Country over Time",
                     status = "primary",
                     width = 6,
                     solidHeader = TRUE,
@@ -429,11 +435,13 @@ server <- function(input, output) {
   })
   
   ### text window ####
+  
   buttonText <- eventReactive(c(input$lookup),{
     
-    read.table("sentences_filtered.csv", header = TRUE, stringsAsFactors = FALSE) %>% #temporarily here only!
+    sentences %>%
       left_join(country_codes) %>%
       mutate(country=fullname) %>% 
+      filter(date == as.POSIXct(nearPoints(global$filteredWords, input$plot1_click)[1,"date"])) %>%
       filter(country==input$userCountry) %>%
       filter(grepl(nearPoints(global$filteredWords, input$plot1_click)[1,"word"],sentence)) %>%
       select(sentence) %>% 
@@ -441,9 +449,11 @@ server <- function(input, output) {
     
   })
   
-  output$text <- renderTable({
+  output$text <- renderHtmlTableWidget({
     
-    buttonText()
+    htmlTableWidget(buttonText(),number_of_entries = c(10, 25))
+    
+    
     
   })
   
@@ -560,31 +570,29 @@ server <- function(input, output) {
   #           panel.grid.minor.y = element_blank())
   # })
   
-  # barplot
-  
-  sec_counc_words_R1 <- reactive({
-    sec_counc_words %>%
-      filter(country == input$country) %>% 
-      filter(year == input$year) %>%
-      top_n(10, tf) %>%
-      mutate(word = reorder(word, tf))
-  })
-  
-  output$barPlot <- renderPlot({
-    ggplot(data = sec_counc_words_R1(), aes(word, freqword,label=word)) +
-      geom_col(fill="#5b92e5",color="#5b92e5") +
-      xlab(NULL) +
-      ylab(NULL) +
-      geom_text(size = 5, position = position_stack(vjust = 0.5),
-                color="white",fontface = "bold") +
-      coord_flip() +
-      xlab("Count") +
-      ylab("Word") +
-      theme_bw() +
-      theme(axis.title.y=element_blank(),
-            axis.text.y=element_blank(),
-            axis.ticks.y=element_blank())
-  })
+   # barplot
+   
+   sec_counc_words_R1 <- reactive({
+     sec_counc_words %>%
+       filter(country == input$country) %>% 
+       filter(year == input$year) %>%
+       top_n(10, tf) %>%
+       mutate(word = reorder(word, tf))
+   })
+   
+   output$barPlot <- renderPlot({
+       ggplot(data = sec_counc_words_R1(), aes(word, freqword,label=word)) +
+       geom_col(fill="#5b92e5",color="#5b92e5") +
+       xlab(NULL) +
+       ylab(NULL) +
+       geom_text(size = 5, position = position_stack(vjust = 0.5),
+                 color="white",fontface = "bold") +
+       coord_flip() +
+       theme_bw() +
+       theme(axis.title.y=element_blank(),
+             axis.text.y=element_blank(),
+             axis.ticks.y=element_blank())
+   })
   
   #### wordcloud #####
   
