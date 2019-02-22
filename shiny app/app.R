@@ -126,7 +126,7 @@ ui <- dashboardPage(
                      
                      knobInput(inputId = "maxWordsCloud",
                                label = HTML('<p style="color:black;">Fill Wordcloud:</p>'),
-                               value = 50,
+                               value = 35,
                                min = 3,
                                max = 80,
                                width = "100%",
@@ -475,7 +475,7 @@ server <- function(input, output) {
   
   output$testInfo1 <- renderValueBox({
     valueBox(
-      subtitle = paste0("is the Sentiment Index of ", input$country, " in ", input$year), 
+      subtitle = paste0("is the averaged Sentiment Index of ", input$country, " in ", input$year), 
       value = sentimentScore(),
       icon = icon("heartbeat", lib = "font-awesome"),
       color = "light-blue"
@@ -496,7 +496,7 @@ server <- function(input, output) {
   
   output$testInfo2 <- renderValueBox({
     valueBox(
-      subtitle = paste0("Mentioned ", input$country," the most positively in ", input$year), 
+      subtitle = paste0("of words referring to ", input$country," in ", input$year, " were positive"), 
       value = sentimentPercPos(),
       icon = icon("thumbs-up", lib = "glyphicon"),
       color = "olive"
@@ -517,7 +517,7 @@ server <- function(input, output) {
   
   output$testInfo3 <- renderValueBox({
     valueBox(
-      subtitle = paste0("Mentioned ",  input$country," the most negatively in ", input$year), 
+      subtitle = paste0("of words referring to ", input$country," in ", input$year, " were negative"), 
       value = sentimentPercNeg(),
       icon = icon("thumbs-down", lib = "glyphicon"),
       color = "red"
