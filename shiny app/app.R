@@ -585,10 +585,11 @@ server <- function(input, output) {
     
     ggplot(sec_counc_words_R2(), aes(label = word, 
                                      size = freqword,
-                                     color = country,
+                                     color = freqword,
                                      angle = angle,
                                      replace = TRUE),
            rm_outside = TRUE) +
+      scale_color_gradient(low = "lightgray", high = "blue4") +
       geom_text_wordcloud_area(shape = "circle", 
                                eccentricity = 1) +
       scale_size_area(max_size = 24) +
