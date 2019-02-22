@@ -566,8 +566,6 @@ server <- function(input, output) {
        geom_text(size = 5, position = position_stack(vjust = 0.5),
                  color="white",fontface = "bold") +
        coord_flip() +
-       xlab("Count") +
-       ylab("Word") +
        theme_bw() +
        theme(axis.title.y=element_blank(),
              axis.text.y=element_blank(),
