@@ -4,6 +4,7 @@
 library(tidyverse)
 library(tidytext)
 library(shiny)
+library(shinyBS)
 library(shinydashboard)
 library(shinythemes)
 # library(shinytest)
@@ -251,7 +252,7 @@ ui <- dashboardPage(
               ),
               
               fluidRow(
-                  
+                
                 box(title = "Frequency by Country (Top Users)",
                     status = "primary",
                     width = 3,
@@ -269,7 +270,13 @@ ui <- dashboardPage(
                     uiOutput('countries'),
                     actionButton(
                       "lookup", "Lookup"
-                    )
+                ),
+                    
+                 bsModal(id = "wordquote",
+                            title = "Quote(s) in which the word appeared",
+                            trigger = "lookup"
+                            
+                 )
                     
                 )
                 
@@ -342,7 +349,7 @@ server <- function(input, output) {
   global <- reactiveValues(
     filtereWords=NULL,
     countries = NULL
-    )
+  )
   
   pp <- eventReactive(c(input$refreshWords),{
     global$filteredWords <- words_ts %>% filter(word %in% input$selectedWords) 
@@ -365,10 +372,10 @@ server <- function(input, output) {
             panel.grid.minor.y = element_blank())
   })
   
-
+  
   output$wordsOverTime <- renderPlot({
     pp()
-    }, height = 450, width = 700)
+  }, height = 450, width = 700)
   
   output$corrPlot <- renderPlot({
     
@@ -387,7 +394,7 @@ server <- function(input, output) {
       as.data.frame()
     
   }, options = list(searching = FALSE, paging = FALSE))
-
+  
   
   output$click_info2 <- renderTable({
     
@@ -402,7 +409,7 @@ server <- function(input, output) {
     
     
   }, options = list(searching = FALSE, paging = FALSE)) 
-
+  
   output$click_info3 <- renderTable({
     
     data.frame(
