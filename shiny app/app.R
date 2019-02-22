@@ -269,6 +269,9 @@ ui <- dashboardPage(
                       "lookup", "Lookup"
                     ),
                     
+                    tags$head(tags$style(".modal-dialog{ width:1500px}")),
+                    tags$head(tags$style(".modal-body{ min-height:700px}")),
+                    
                     bsModal(id = "wordquote",
                             title = "Quote(s) in which the word appeared",
                             trigger = "lookup",
@@ -458,7 +461,7 @@ server <- function(input, output) {
   
   output$text <- renderHtmlTableWidget({
     
-    htmlTableWidget(buttonText())
+    htmlTableWidget(buttonText(),number_of_entries = c(10, 25))
     
     
     
