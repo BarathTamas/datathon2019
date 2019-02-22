@@ -296,7 +296,7 @@ ui <- dashboardPage(
               
               fluidRow(
                 
-                box(title = "Line Plot",
+                box(title = "Number of Mentions of Selected Country over Time",
                     status = "primary",
                     width = 6,
                     solidHeader = TRUE,
