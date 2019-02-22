@@ -59,7 +59,7 @@ top_words_ts <- words_ts %>%
   select(date,word,n) %>% 
   filter(word %in% top_slopes$word) %>% 
   spread(key = word, value = n)
-word_corr <- cor(top_words_ts[,2:50])
+word_corr <- cor(top_words_ts[,2:51])
 
 #correlated trends
 pal=colorRampPalette(rev(brewer.pal(11,"RdYlBu")))(100)
@@ -130,24 +130,37 @@ date_country_word <- text_df %>%
 #save the dataframe for the webapp
 write.table(date_country_word,"shiny app/date_country_word.csv")
 
-result <- date_country_word %>%
-  filter(word==keyword) %>%
-  filter(date==keydate) %>% 
-  count(country)
+#prefiltering raw text-----------
 
-keycountries=result %>%
-  top_n(5) %>% 
-  mutate_at(1, as.character)
-
-#extracting sentences of interest with the keyword
-text_df2 <-text_df_raw %>%
+sent_df <-text_df_raw %>%
   unnest_tokens(sentence, text, token="sentences") %>%  #tokenize into sentences
   filter(nchar(sentence)>10)  #remove errors
+
+sent_filt_df=tibble(
+  session=as.integer(),
+  date=as.POSIXct(NA),
+  country=NA,
+  sentence=as.character()
+)
+
+for (word in as.vector(top_slopes$word)){
+  sent_filt_df <- sent_df %>%
+    filter(grepl(word,sentence)) %>% 
+    rbind(sent_filt_df)
+                                }
+sent_filt_df <- unique(sent_filt_df)
+#save the dataframe for the webapp
+write.table(sent_filt_df,"shiny app/sentences_filtered.csv")
+
+#extracting sentences of interest with the keyword--------
+
 
 keytext <- text_df2 %>% 
   filter(date==keydate) %>% 
   filter(country %in% keycountries$country) %>%
   filter(grepl(keyword,sentence))
+
+
 
 
 
