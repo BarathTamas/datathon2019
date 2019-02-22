@@ -87,7 +87,7 @@ ui <- dashboardPage(
                      
                      pickerInput(
                        inputId = "selectedWords",
-                       label = "Select words to plot:",
+                       label = HTML('<p style="color:black;">Select Words to Plot:</p>'),
                        choices = trending_words$word,
                        selected = c("arab","israel","arms","middle","force,"),
                        options = pickerOptions(
@@ -107,13 +107,13 @@ ui <- dashboardPage(
     conditionalPanel(condition = "input.sidebar=='dashboard2'",
                      
                      selectInput(inputId = "country",
-                                 label = "Select Country:",
+                                 label = HTML('<p style="color:black;">Select Country:</p>'),
                                  choices = unique(sec_counc_count$country),
                                  selected = sec_counc_count$country[1],
                                  selectize = TRUE),
                      
                      sliderInput(inputId = "year",
-                                 label = "Select Year:",
+                                 label = HTML('<p style="color:black;">Select Year:</p>'),
                                  min = 1970,
                                  max = 2015,
                                  value = 2015,
@@ -121,7 +121,7 @@ ui <- dashboardPage(
                                  sep = ""),
                      
                      knobInput(inputId = "maxWordsCloud",
-                               label = "Select Number of Words in Cloud:",
+                               label = HTML('<p style="color:black;">Select Number of Words in Cloud:</p>'),
                                value = 10,
                                min = 3,
                                max = 20,
