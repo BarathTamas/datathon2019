@@ -306,23 +306,31 @@ ui <- dashboardPage(
                     
                 ),
                 
-                # box(title = "Bar Plot",
-                #     status = "info",
-                #     width = 3,
+                #tabBox(title = "Bar Plot",
+                #     status = "primary",
+                #     width = 6,
                 #     solidHeader = TRUE,
                 #     
                 #     withSpinner(plotOutput("barPlot"))
                 #     
                 # ),
                 
-                box(title = "Wordcloud",
-                    status = "primary",
-                    width = 6,
-                    solidHeader = TRUE,
-                    
-                    withSpinner(plotOutput("wordcloud"))
-                    
+                tabBox(title = "Frequency",
+                       #status = "primary",
+                       width = 6,
+                       tabPanel("Wordcloud", withSpinner(plotOutput("wordcloud"))),
+                       tabPanel("Bar plot", withSpinner(plotOutput("barPlot")))
+                  
                 )
+                
+                #box(title = "Wordcloud",
+                #    status = "primary",
+                #    width = 6,
+                #    solidHeader = TRUE,
+                #    
+                #    withSpinner(plotOutput("wordcloud"))
+                #    
+                #)
               )
               
       ),
@@ -552,26 +560,26 @@ server <- function(input, output) {
   #           panel.grid.minor.y = element_blank())
   # })
   
-  # # barplot
-  # 
-  # sec_counc_words_R1 <- reactive({
-  #   sec_counc_words %>%
-  #     filter(country == input$country) %>% 
-  #     filter(year == input$year) %>%
-  #     top_n(10, tf) %>%
-  #     mutate(word = reorder(word, tf))
-  # })
-  # 
-  # output$barPlot <- renderPlot({
-  #   ggplot(data = sec_counc_words_R1(), aes(word, tf)) +
-  #     geom_col(show.legend = FALSE) +
-  #     coord_flip() +
-  #     xlab("Count") +
-  #     ylab("Word") +
-  #     theme_bw() +
-  #     theme(legend.position = "bottom",
-  #           panel.grid.minor.y = element_blank())
-  # })
+   # barplot
+   
+  sec_counc_words_R1 <- reactive({
+     sec_counc_words %>%
+       filter(country == input$country) %>% 
+       filter(year == input$year) %>%
+       top_n(10, tf) %>%
+       mutate(word = reorder(word, tf))
+   })
+   
+   output$barPlot <- renderPlot({
+     ggplot(data = sec_counc_words_R1(), aes(word, tf)) +
+       geom_col(show.legend = FALSE) +
+       coord_flip() +
+       xlab("Count") +
+       ylab("Word") +
+       theme_bw() +
+       theme(legend.position = "bottom",
+             panel.grid.minor.y = element_blank())
+   })
   
   #### wordcloud #####
   
