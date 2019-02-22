@@ -280,7 +280,8 @@ ui <- dashboardPage(
                 withSpinner(valueBoxOutput("testInfo2")),
                 withSpinner(valueBoxOutput("testInfo3")),
                 withSpinner(valueBoxOutput("testInfo4")),
-                withSpinner(valueBoxOutput("testInfo5"))
+                withSpinner(valueBoxOutput("testInfo5")),
+                withSpinner(valueBoxOutput("testInfo6"))
                 
               ),
               
@@ -490,7 +491,7 @@ server <- function(input, output) {
     
     sentiment_data %>%
       filter(year == input$year & country == input$country & sentiment == "positive") %>% 
-      select(proportionsentiment2, topcountry)
+      select(proportion, top_country)
     
   })
   
@@ -498,7 +499,7 @@ server <- function(input, output) {
     valueBox(
       subtitle = paste0("of words referring to ", input$country," in ", input$year, " were positive"), 
       value = sentimentPercPos()[, 1],
-      icon = icon("heart", lib = "font-awesome"),
+      icon = icon("thumbs-up", lib = "glyphicon"),
       color = "olive"
     )
   })
@@ -511,7 +512,7 @@ server <- function(input, output) {
     
     sentiment_data %>%
       filter(year == input$year & country == input$country & sentiment == "negative") %>% 
-      select(proportionsentiment2, topcountry)
+      select(proportion, top_country)
     
   })
   
@@ -519,19 +520,27 @@ server <- function(input, output) {
     valueBox(
       subtitle = paste0("of words referring to ", input$country," in ", input$year, " were negative"), 
       value = sentimentPercNeg()[, 1],
-      icon = icon("heart-broken", lib = "font-awesome"),
+      icon = icon("thumbs-down", lib = "glyphicon"),
       color = "red"
     )
   })
   
   #### info box 4 ####
   
+  yearCount <- reactive({
+    
+    sec_counc_count %>%
+      filter(year == input$year & country == input$country) %>% 
+      select(count)
+    
+  })
+  
   output$testInfo4 <- renderValueBox({
     valueBox(
-      subtitle = paste0("Mentioned ", input$country," the most positive in ", input$year), 
-      value = sentimentPercPos()[, 2],
-      icon = icon("thumbs-down", lib = "glyphicon"),
-      color = "red"
+      subtitle = paste0("times ", input$country, " was mentioned in ", input$year),
+      value = yearCount(),
+      icon = icon("sort-amount-up", lib = "font-awesome"),
+      color = "light-blue"
     )
   })
   
@@ -539,9 +548,20 @@ server <- function(input, output) {
   
   output$testInfo5 <- renderValueBox({
     valueBox(
-      subtitle = paste0("Mentioned ", input$country," the most negative in ", input$year), 
+      subtitle = paste0("mentioned ", input$country," the most positive in ", input$year), 
       value = sentimentPercNeg()[, 2],
-      icon = icon("thumbs-down", lib = "glyphicon"),
+      icon = icon("user-plus", lib = "font-awesome"),
+      color = "olive"
+    )
+  })
+  
+  #### info box 6 ####
+  
+  output$testInfo6 <- renderValueBox({
+    valueBox(
+      subtitle = paste0("mentioned ", input$country," the most negative in ", input$year), 
+      value = sentimentPercNeg()[, 2],
+      icon = icon("user-minus", lib = "font-awesome"),
       color = "red"
     )
   })
