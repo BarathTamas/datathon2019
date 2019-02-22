@@ -22,6 +22,7 @@ library(ggwordcloud)
 library(highcharter)
 library(htmlTable)
 
+
 # shiny dashboard -----------------------------------------------------------------------------
 
 options(shiny.usecairo = TRUE)
@@ -139,7 +140,16 @@ ui <- dashboardPage(
                                fgColor = "#5b92e5",
                                inputColor = "#5b92e5"
                      )
+    ),
+    hr(),
+    
+    #### Nato image ####
+    
+    sidebarPanel(
+      #render(local_logo)
+      #img(src="/Users/BHM/Documents/Degree_MSc/Year_1/Semester_2/DATAthon/datathon2019/shiny app/Logo.png", width="100%")
     )
+    
   ),
   
   #### body ####
@@ -350,6 +360,10 @@ server <- function(input, output) {
     filtereWords=NULL,
     countries = NULL
   )
+  
+  #### NATO IMAGE ####
+
+
   
   #### word plot ####
   
