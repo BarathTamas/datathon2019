@@ -380,10 +380,14 @@ server <- function(input, output) {
   
   output$corrPlot <- renderHighchart({
     
-    #pal <- colorRampPalette(rev(brewer.pal(11, "RdYlBu")))(100)
+    pal <- colorRampPalette(rev(brewer.pal(11, "RdYlBu")))(100)
     #pheatmap(word_corrs, color = pal, treeheight_row = 0, treeheight_col = 0)
     
-    hc_size(hchart(as.matrix(word_corrs_ordered)), height = 450, width = 480)
+    
+      hchart(as.matrix(word_corrs_ordered)) %>%
+      hc_size(height = 450, width = 480) %>%
+      hc_colorAxis(stops = color_stops(10, rev(RColorBrewer::brewer.pal(10, "RdYlBu"))))
+    
     
   }
   #, height = 450, width = 480
