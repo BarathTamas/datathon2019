@@ -122,13 +122,13 @@ ui <- dashboardPage(
                      
                      knobInput(inputId = "maxWordsCloud",
                                label = HTML('<p style="color:black;">Select Number of Words in Cloud:</p>'),
-                               value = 10,
+                               value = 20,
                                min = 3,
-                               max = 20,
+                               max = 50,
                                displayPrevious = TRUE, 
                                lineCap = "round",
-                               fgColor = "#428BCA",
-                               inputColor = "#428BCA"
+                               fgColor = "#5b92e5",
+                               inputColor = "#5b92e5"
                      )
                      
     ),
