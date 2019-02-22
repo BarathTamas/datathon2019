@@ -386,8 +386,9 @@ server <- function(input, output) {
     
       hchart(as.matrix(word_corrs_ordered)) %>%
       hc_size(height = 450, width = 480) %>%
-      hc_colorAxis(stops = color_stops(10, rev(RColorBrewer::brewer.pal(10, "RdYlBu"))))
-    
+      hc_colorAxis(stops = color_stops(10, rev(RColorBrewer::brewer.pal(10, "RdYlBu")))) %>%
+      hc_xAxis(tickmount = 50) %>%
+      hc_yAxis(tickmount = 50)
     
   }
   #, height = 450, width = 480
