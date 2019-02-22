@@ -97,9 +97,7 @@ ui <- dashboardPage(
                          maxOptions = 10
                        ),
                        multiple = TRUE
-                     ),
-                     
-                     submitButton("Apply Changes", icon("refresh"), width = "100%")
+                     )
     ),
     
     #### sliders DB 2 ####
