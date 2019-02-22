@@ -73,8 +73,7 @@ ui <- dashboardPage(
     sidebarMenu(id = "sidebar",
                 
                 menuItem("Trending Words:", tabName = "dashboard", icon = icon("chart-line", lib = "font-awesome")),
-                menuItem("Dashboard 2:", tabName = "dashboard2", icon = icon("chart-line", lib = "font-awesome")),
-                menuItem("Dashboard 3:", tabName = "dashboard3", icon = icon("chart-line", lib = "font-awesome")),
+                menuItem("Country Sentiment:", tabName = "dashboard2", icon = icon("hand-holding-heart", lib = "font-awesome")),
                 menuItem("About us:", tabName = "aboutus", icon = icon("question", lib = "font-awesome"))
                 
     ),
@@ -131,21 +130,14 @@ ui <- dashboardPage(
                                min = 3,
                                max = 80,
                                width = "100%",
-                               height = "80%",
+                               height = "90%",
                                displayPrevious = TRUE,
                                immediate = FALSE,
                                lineCap = "round",
                                fgColor = "#5b92e5",
-                               inputColor = "#ffffff"
+                               inputColor = "#5b92e5"
                      )
-    ),
-    
-    #### sliders DB 3 ####
-    
-    conditionalPanel(condition = "input.sidebar=='dashboard3'"
-                     
     )
-    
   ),
   
   #### body ####
@@ -565,7 +557,7 @@ server <- function(input, output) {
        top_n(10, tf) %>%
        mutate(word = reorder(word, tf))
    })
-   ### barplot #####
+   
    output$barPlot <- renderPlot({
        ggplot(data = sec_counc_words_R1(), aes(word, freqword,label=word)) +
        geom_col(fill="#5b92e5",color="#5b92e5") +
@@ -574,6 +566,8 @@ server <- function(input, output) {
        geom_text(size = 5, position = position_stack(vjust = 0.5),
                  color="white",fontface = "bold") +
        coord_flip() +
+       xlab("Count") +
+       ylab("Word") +
        theme_bw() +
        theme(axis.title.y=element_blank(),
              axis.text.y=element_blank(),
