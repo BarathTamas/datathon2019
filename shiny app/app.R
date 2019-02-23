@@ -57,7 +57,8 @@ path <- "country_codes.feather"
 write_feather(country_codes, path)
 country_codes <- read_feather(path)
 
-sentences <- read.table("sentences_filtered.csv", header = TRUE, stringsAsFactors = FALSE)
+# sentences <- read.table("sentences_filtered.csv", header = TRUE, stringsAsFactors = FALSE)
+sentences <- as.tibble(data.table::fread("sentences_filtered.csv"))
 path <- "sentences.feather"
 write_feather(sentences, path)
 sentences <- read_feather(path)
