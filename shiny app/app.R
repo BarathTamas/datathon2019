@@ -150,7 +150,7 @@ ui <- dashboardPage(
                                label = HTML('<p style="color:black;">Fill Wordcloud:</p>'),
                                value = 35,
                                min = 25,
-                               max = 75,
+                               max = 60,
                                width = "100%",
                                height = "90%",
                                displayPrevious = TRUE,
@@ -160,14 +160,13 @@ ui <- dashboardPage(
                                inputColor = "#5b92e5"
                      )
     ),
-    hr(),
+    hr()
     
     #### Nato image ####
     
-    sidebarPanel(
-      #render(local_logo)
-      #img(src="/Users/BHM/Documents/Degree_MSc/Year_1/Semester_2/DATAthon/datathon2019/shiny app/Logo.png", width="100%")
-    )
+    # sidebarPanel(width = "170px", height = "113px",
+    #   imageOutput("logo_un", width = "180px", height = "120px")
+    # )
     
   ),
   
@@ -252,7 +251,7 @@ ui <- dashboardPage(
                     height = "520px",
                     solidHeader = TRUE,
                     
-                    withSpinner(highchartOutput("corrPlot", width = 480, height = 480))
+                    withSpinner(highchartOutput("corrPlot", width = 495, height = 480))
                     
                 ),
                 
@@ -345,13 +344,13 @@ ui <- dashboardPage(
                 #     
                 # ),
                 
-                tabBox(title = "Top Referring Words",
+                tabBox(title = "Top Associated Words",
                        #status = "primary",
                        width = 6,
                        #solidHeader = TRUE,
                        
                        tabPanel("Wordcloud", withSpinner(plotOutput("wordcloud"))),
-                       tabPanel("Bar chart", withSpinner(plotOutput("barPlot")))
+                       tabPanel("Bar Chart", withSpinner(plotOutput("barPlot")))
                        
                 )
               )
@@ -383,7 +382,16 @@ server <- function(input, output) {
   )
   
   #### NATO IMAGE ####
-
+# 
+#   output$logo_un <- renderImage(
+#     expr = list(
+#       src = "logo.png",
+#       filetype = "image/png",
+#       width = 180,
+#       height = 120),
+#     deleteFile = FALSE
+#   
+#   )
 
   
   #### word plot ####
@@ -402,8 +410,8 @@ server <- function(input, output) {
                        limits = c(as.POSIXct("1969-12-01"),
                                   as.POSIXct("2016-01-31"))) +
       scale_color_discrete(name = "Selected Words:") +
-      xlab("Year") +
-      ylab("Frequency") +
+      xlab("Date") +
+      ylab("Word Frequency") +
       theme_bw() +
       theme(legend.position = "bottom",
             panel.grid.minor.y = element_blank())
@@ -634,7 +642,7 @@ server <- function(input, output) {
       hc_add_theme(hc_theme_smpl()) %>%
       hc_plotOptions(line = list(color = "deepskyblue")) %>% 
       hc_xAxis(title = list(text = "Year")) %>% 
-      hc_yAxis(title = list(text = "Frequency"))
+      hc_yAxis(title = list(text = "Number of Mentions"))
   })
   
   # output$linePlot <- renderPlot({
@@ -646,6 +654,8 @@ server <- function(input, output) {
   #     theme(legend.position = "bottom",
   #           panel.grid.minor.y = element_blank())
   # })
+  
+  #### barplot ####
   
    # barplot
    
