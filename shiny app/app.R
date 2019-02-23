@@ -18,7 +18,6 @@ library(highcharter)
 library(htmlTable)
 library(feather)
 
-
 # shiny dashboard -----------------------------------------------------------------------------
 
 options(shiny.usecairo = TRUE)
@@ -38,15 +37,10 @@ path <- "trending_words.feather"
 write_feather(trending_words, path)
 trending_words <- read_feather(path)
 
-word_corrs <- read.table("word_correlations.csv", header = TRUE, stringsAsFactors = FALSE)
-path <- "word_corrs.feather"
-write_feather(word_corrs, path)
-word_corrs <- read_feather(path)
-
 word_corrs_ordered <- read.csv("word_corrs_ordered.csv", header = TRUE, stringsAsFactors = FALSE, row.names = 1)
-path <- "word_corrs_ordered.feather"
-write_feather(word_corrs_ordered, path)
-word_corrs_ordered <- read_feather(path)
+# path <- "word_corrs_ordered.feather"
+# write_feather(word_corrs_ordered, path)
+# word_corrs_ordered <- read_feather(path)
 
 session_info <- read.table("session_info.csv", header = TRUE, stringsAsFactors = FALSE)
 path <- "session_info.feather"
