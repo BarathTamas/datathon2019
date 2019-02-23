@@ -299,7 +299,7 @@ ui <- dashboardPage(
                     tags$head(tags$style(".modal-body{ min-height:700px}")),
                     
                     bsModal(id = "wordquote",
-                            title = "Quote(s) in which the word appeared",
+                            title = "Quote(s) in which the selected word appeared",
                             trigger = "lookup",
                             withSpinner(htmlTableWidgetOutput("text"))
                     ),
