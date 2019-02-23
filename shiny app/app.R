@@ -7,7 +7,6 @@ library(shiny)
 library(shinyBS)
 library(shinydashboard)
 library(shinythemes)
-library(DT)
 library(shinyWidgets)
 library(shinycssloaders)
 library(Cairo)
@@ -90,7 +89,7 @@ ui <- dashboardPage(
   
   dashboardHeader(
     
-    title = "UN Debate Web App"
+    title = "UN Transparency Tool"
     
   ),
   
@@ -473,7 +472,7 @@ server <- function(input, output) {
       as.data.frame()
     
     global$countries %>%
-      htmlTableWidget(number_of_entries = c(10),rnames=F)
+      htmlTableWidget(number_of_entries = c(10),rnames = FALSE)
     
     
   }) 
