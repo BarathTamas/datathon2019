@@ -444,6 +444,7 @@ server <- function(input, output) {
     session_info %>%
       filter(date == as.POSIXct(nearPoints(global$filteredWords, input$plot1_click)[1,"date"])) %>% 
       mutate(date=format(as.POSIXct(date),'%Y %B')) %>% 
+      mutate(link=paste0("<a href='",link,"'>",link,"</a>")) %>% 
       as.data.frame(rownames= FALSE) %>% 
       htmlTableWidget(number_of_entries = c(1),rnames=F)
     
