@@ -15,5 +15,7 @@ We are all first year students of the Master of Statistics here at KU Leuven. Th
 This is our creation for the 2019 Datathon competition at KU Leuven.
 
 
+### About the tool
 
+We  find that transparency is very important, both for companies and governmental organisations. The United Nations is a powerful intergovernmental organisation whose purpose is to maintain international peace and security, develop friendly relations among nations, achieve international co-operation and be a centre for harmonizing the actions of nations. The question we asking is as follows: Does the UN fulfill its purposes, or has it turned to aimless diplomatic courtesy?
 
