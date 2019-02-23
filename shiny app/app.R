@@ -163,9 +163,8 @@ ui <- dashboardPage(
     
     #### Nato image ####
     
-    sidebarPanel(
-      #render(local_logo)
-      #img(src="/Users/BHM/Documents/Degree_MSc/Year_1/Semester_2/DATAthon/datathon2019/shiny app/Logo.png", width="100%")
+    sidebarPanel(width = "170px", height = "113px",
+      imageOutput("logo_un", width = "180px", height = "120px")
     )
     
   ),
@@ -383,6 +382,15 @@ server <- function(input, output) {
   
   #### NATO IMAGE ####
 
+  output$logo_un <- renderImage(
+    expr = list(
+      src = "logo.png",
+      filetype = "image/png",
+      width = 180,
+      height = 120),
+    deleteFile = FALSE
+  
+  )
 
   
   #### word plot ####
