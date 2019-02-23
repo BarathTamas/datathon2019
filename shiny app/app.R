@@ -136,8 +136,8 @@ ui <- dashboardPage(
                      
                      selectInput(inputId = "country",
                                  label = HTML('<p style="color:black;">Select Country:</p>'),
-                                 choices = unique(sec_counc_count$country),
-                                 selected = sec_counc_count$country[1],
+                                 choices = c("China", "France", "Israel", "Russia", "Syria", "UK", "USA"),
+                                 selected = "China",
                                  selectize = TRUE),
                      
                      selectInput(inputId = "year",
