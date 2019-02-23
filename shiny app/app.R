@@ -462,7 +462,9 @@ server <- function(input, output) {
       arrange(desc(n)) %>% 
       mutate(country=fullname,frequency=n) %>% 
       select(country,frequency) %>%
-      as.data.frame() %>% 
+      as.data.frame()
+    
+    global$countries %>%
       htmlTableWidget(number_of_entries = c(10),rnames=F)
     
     
