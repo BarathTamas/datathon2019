@@ -116,7 +116,7 @@ ui <- dashboardPage(
                        inputId = "selectedWords",
                        label = HTML('<p style="color:black;">Select Words to Plot:</p>'),
                        choices = trending_words$word,
-                       selected = c("arab","israel","arms"),
+                       selected = "change",
                        options = pickerOptions(
                          actionsBox = TRUE,
                          size = 10,
@@ -137,7 +137,7 @@ ui <- dashboardPage(
                      selectInput(inputId = "country",
                                  label = HTML('<p style="color:black;">Select Country:</p>'),
                                  choices = c("China", "France", "Israel", "Russia", "Syria", "UK", "USA"),
-                                 selected = "China",
+                                 selected = "Syria",
                                  selectize = TRUE),
                      
                      selectInput(inputId = "year",
