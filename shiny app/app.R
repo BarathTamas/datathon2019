@@ -468,7 +468,7 @@ server <- function(input, output) {
   
   output$text <- renderHtmlTableWidget({
     
-    htmlTableWidget(buttonText(),number_of_entries = c(10, 25))
+    htmlTableWidget(buttonText(),number_of_entries = c(25, 10))
     
     
     
