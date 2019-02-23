@@ -561,7 +561,7 @@ server <- function(input, output) {
   
   output$testInfo2 <- renderValueBox({
     valueBox(
-      subtitle = paste0("of words referring to ", input$country," in ", input$year, " were positive"), 
+      subtitle = paste0("of words associated with ", input$country," in ", input$year, " were positive"), 
       value = sentimentPercPos()[, 1],
       icon = icon("thumbs-up", lib = "glyphicon"),
       color = "olive"
@@ -582,7 +582,7 @@ server <- function(input, output) {
   
   output$testInfo3 <- renderValueBox({
     valueBox(
-      subtitle = paste0("of words referring to ", input$country," in ", input$year, " were negative"), 
+      subtitle = paste0("of words associated with ", input$country," in ", input$year, " were negative"), 
       value = sentimentPercNeg()[, 1],
       icon = icon("thumbs-down", lib = "glyphicon"),
       color = "red"
