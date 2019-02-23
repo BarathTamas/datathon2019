@@ -160,13 +160,13 @@ ui <- dashboardPage(
                                inputColor = "#5b92e5"
                      )
     ),
-    hr(),
+    hr()
     
     #### Nato image ####
     
-    sidebarPanel(width = "170px", height = "113px",
-      imageOutput("logo_un", width = "180px", height = "120px")
-    )
+    # sidebarPanel(width = "170px", height = "113px",
+    #   imageOutput("logo_un", width = "180px", height = "120px")
+    # )
     
   ),
   
@@ -382,16 +382,16 @@ server <- function(input, output) {
   )
   
   #### NATO IMAGE ####
-
-  output$logo_un <- renderImage(
-    expr = list(
-      src = "logo.png",
-      filetype = "image/png",
-      width = 180,
-      height = 120),
-    deleteFile = FALSE
-  
-  )
+# 
+#   output$logo_un <- renderImage(
+#     expr = list(
+#       src = "logo.png",
+#       filetype = "image/png",
+#       width = 180,
+#       height = 120),
+#     deleteFile = FALSE
+#   
+#   )
 
   
   #### word plot ####
