@@ -252,7 +252,7 @@ ui <- dashboardPage(
                     height = "520px",
                     solidHeader = TRUE,
                     
-                    withSpinner(highchartOutput("corrPlot", width = 480, height = 480))
+                    withSpinner(highchartOutput("corrPlot", width = 495, height = 480))
                     
                 ),
                 
@@ -345,7 +345,7 @@ ui <- dashboardPage(
                 #     
                 # ),
                 
-                tabBox(title = "Top Referring Words",
+                tabBox(title = "Top Associated Words",
                        #status = "primary",
                        width = 6,
                        #solidHeader = TRUE,
@@ -402,8 +402,8 @@ server <- function(input, output) {
                        limits = c(as.POSIXct("1969-12-01"),
                                   as.POSIXct("2016-01-31"))) +
       scale_color_discrete(name = "Selected Words:") +
-      xlab("Year") +
-      ylab("Frequency") +
+      xlab("Date") +
+      ylab("Word Frequency") +
       theme_bw() +
       theme(legend.position = "bottom",
             panel.grid.minor.y = element_blank())
@@ -630,7 +630,7 @@ server <- function(input, output) {
       hc_add_theme(hc_theme_smpl()) %>%
       hc_plotOptions(line = list(color = "deepskyblue")) %>% 
       hc_xAxis(title = list(text = "Year")) %>% 
-      hc_yAxis(title = list(text = "Frequency"))
+      hc_yAxis(title = list(text = "Number of Mentions"))
   })
   
   # output$linePlot <- renderPlot({
@@ -642,6 +642,8 @@ server <- function(input, output) {
   #     theme(legend.position = "bottom",
   #           panel.grid.minor.y = element_blank())
   # })
+  
+  #### barplot ####
   
    # barplot
    
