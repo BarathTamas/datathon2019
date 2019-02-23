@@ -350,7 +350,7 @@ ui <- dashboardPage(
                        #solidHeader = TRUE,
                        
                        tabPanel("Wordcloud", withSpinner(plotOutput("wordcloud"))),
-                       tabPanel("Bar chart", withSpinner(plotOutput("barPlot")))
+                       tabPanel("Bar Chart", withSpinner(plotOutput("barPlot")))
                        
                 )
               )
