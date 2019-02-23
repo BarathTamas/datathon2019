@@ -293,7 +293,7 @@ ui <- dashboardPage(
                     withSpinner(tableOutput("click_info3")),
                     uiOutput('countries'),
                     actionButton(
-                      "lookup", "Lookup"
+                      "lookup", "Find Quote"
                     ),
                     
                     tags$head(tags$style(".modal-dialog{ width:1500px}")),
