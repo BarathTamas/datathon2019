@@ -16,6 +16,7 @@ library(pheatmap)
 library(ggwordcloud)
 library(highcharter)
 library(htmlTable)
+library(feather)
 
 # shiny dashboard -----------------------------------------------------------------------------
 
@@ -27,27 +28,61 @@ options(shiny.usecairo = TRUE)
 
 words_ts <- read.table("words_ts.csv", header = TRUE, stringsAsFactors = FALSE) %>% 
   mutate(date = as.POSIXct(date)) #date column as POSIXct from the start
+# path <- "words_ts.feather"
+# write_feather(words_ts, path)
+# words_ts <- read_feather(path)
 
 trending_words <- read.table("trending words.csv", header = TRUE, stringsAsFactors = FALSE)
+path <- "trending_words.feather"
+write_feather(trending_words, path)
+trending_words <- read_feather(path)
 
 word_corrs <- read.table("word_correlations.csv", header = TRUE, stringsAsFactors = FALSE)
+path <- "word_corrs.feather"
+write_feather(word_corrs, path)
+word_corrs <- read_feather(path)
 
 word_corrs_ordered <- read.csv("word_corrs_ordered.csv", header = TRUE, stringsAsFactors = FALSE, row.names = 1)
+path <- "word_corrs_ordered.feather"
+write_feather(word_corrs_ordered, path)
+word_corrs_ordered <- read_feather(path)
 
 session_info <- read.table("session_info.csv", header = TRUE, stringsAsFactors = FALSE)
+path <- "session_info.feather"
+write_feather(session_info, path)
+session_info <- read_feather(path)
 
 date_country_word <- read.table("date_country_word.csv", header = TRUE, stringsAsFactors = FALSE)
+path <- "date_country_word.feather"
+write_feather(date_country_word, path)
+date_country_word <- read_feather(path)
 
 country_codes <- read.table("country_codes.csv", header = TRUE, stringsAsFactors = FALSE)
+path <- "country_codes.feather"
+write_feather(country_codes, path)
+country_codes <- read_feather(path)
+
 sentences <- read.table("sentences_filtered.csv", header = TRUE, stringsAsFactors = FALSE)
+path <- "sentences.feather"
+write_feather(sentences, path)
+sentences <- read_feather(path)
 
 # dashboard 2
 
 sec_counc_count <- read.csv("securitycouncil_count.csv", header = TRUE, stringsAsFactors = FALSE)
+path <- "sec_counc_count.feather"
+write_feather(sec_counc_count, path)
+sec_counc_count <- read_feather(path)
 
 sec_counc_words <- read.csv("securitycouncil_words.csv", header = TRUE, stringsAsFactors = FALSE)
+path <- "sec_counc_words.feather"
+write_feather(sec_counc_words, path)
+sec_counc_words <- read_feather(path)
 
 sentiment_data <- read.csv("securitycouncil_sentiment.csv", header = TRUE, stringsAsFactors = FALSE)
+path <- "sentiment_data.feather"
+write_feather(sentiment_data, path)
+sentiment_data <- read_feather(path)
 
 # ui ------------------------------------------------------------------------------------------
 
@@ -231,7 +266,7 @@ ui <- dashboardPage(
                 
                 box(title = "Information About Selected Session",
                     status = "primary",
-                    width = 8,
+                    width = 7,
                     solidHeader = TRUE,
                     
                     withSpinner(tableOutput("click_info"))
@@ -240,7 +275,7 @@ ui <- dashboardPage(
                 
                 box(title = "Frequency by Country (Top Users)",
                     status = "primary",
-                    width = 2,
+                    width = 3,
                     solidHeader = TRUE,
                     
                     withSpinner(tableOutput("click_info2"))
@@ -324,7 +359,7 @@ ui <- dashboardPage(
       
       tabItem(tabName = "aboutus",
               
-              includeMarkdown("aboutUs.Rmd")
+              includeMarkdown("AboutUs.Rmd")
               
       )
     )
