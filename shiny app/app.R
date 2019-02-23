@@ -350,7 +350,7 @@ ui <- dashboardPage(
                        #solidHeader = TRUE,
                        
                        tabPanel("Wordcloud", withSpinner(plotOutput("wordcloud"))),
-                       tabPanel("Bar chart", withSpinner(plotOutput("barPlot")))
+                       tabPanel("Bar Chart", withSpinner(plotOutput("barPlot")))
                        
                 )
               )
@@ -507,6 +507,10 @@ server <- function(input, output) {
       filter(country==input$userCountry) %>%
       filter(grepl(nearPoints(global$filteredWords, input$plot1_click)[1,"word"],sentence)) %>%
       select(sentence) %>% 
+      mutate(sentence=gsub(nearPoints(global$filteredWords, input$plot1_click)[1,"word"],
+                           paste0('<b><font color="#a50026">',
+                                  nearPoints(global$filteredWords, input$plot1_click)[1,"word"],
+                                  '</font></b>'),sentence)) %>% 
       as.data.frame()
     
   })
