@@ -150,7 +150,7 @@ ui <- dashboardPage(
                                label = HTML('<p style="color:black;">Fill Wordcloud:</p>'),
                                value = 35,
                                min = 25,
-                               max = 75,
+                               max = 60,
                                width = "100%",
                                height = "90%",
                                displayPrevious = TRUE,
