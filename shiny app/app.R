@@ -274,7 +274,7 @@ ui <- dashboardPage(
                     width = 7,
                     solidHeader = TRUE,
                     
-                    withSpinner(tableOutput("click_info"))
+                    withSpinner(htmlTableWidgetOutput("click_info",height = "auto"))
                     
                 ),
                 
@@ -283,7 +283,7 @@ ui <- dashboardPage(
                     width = 3,
                     solidHeader = TRUE,
                     
-                    withSpinner(tableOutput("click_info2"))
+                    withSpinner(htmlTableWidgetOutput("click_info2",height="auto"))
                     
                 ),
                 
@@ -291,7 +291,7 @@ ui <- dashboardPage(
                     status = "primary",
                     width = 2,
                     solidHeader = TRUE,
-                    withSpinner(tableOutput("click_info3")),
+                    withSpinner(htmlTableWidgetOutput("click_info3",height="auto")),
                     uiOutput('countries'),
                     actionButton(
                       "lookup", "Find Quote"
@@ -439,18 +439,20 @@ server <- function(input, output) {
   
   #### info table 1 ####
   
-  output$click_info <- renderTable({
+  output$click_info <- renderHtmlTableWidget({
     
     session_info %>%
       filter(date == as.POSIXct(nearPoints(global$filteredWords, input$plot1_click)[1,"date"])) %>% 
       mutate(date=format(as.POSIXct(date),'%Y %B')) %>% 
-      as.data.frame()
+      mutate(link=paste0("<a href='",link,"'>",link,"</a>")) %>% 
+      as.data.frame(rownames= FALSE) %>% 
+      htmlTableWidget(number_of_entries = c(1),rnames=F)
     
-  }, options = list(searching = FALSE, paging = FALSE))
+  })
   
   #### info table 2 ####
   
-  output$click_info2 <- renderTable({
+  output$click_info2 <- renderHtmlTableWidget({
     
     global$countries <- date_country_word %>%
       filter(date == as.POSIXct(nearPoints(global$filteredWords, input$plot1_click)[1,"date"])) %>% 
@@ -459,19 +461,24 @@ server <- function(input, output) {
       left_join(country_codes) %>% #despite intuition its faster this way then prejoining 
       arrange(desc(n)) %>% 
       mutate(country=fullname,frequency=n) %>% 
-      select(country,frequency) %>% as.data.frame()
+      select(country,frequency) %>%
+      as.data.frame()
+    
+    global$countries %>%
+      htmlTableWidget(number_of_entries = c(10),rnames=F)
     
     
-  }, options = list(searching = FALSE, paging = FALSE)) 
+  }) 
   
   #### info table 3 ####
   
-  output$click_info3 <- renderTable({
+  output$click_info3 <- renderHtmlTableWidget({
     
     data.frame(
       word = nearPoints(global$filteredWords, input$plot1_click)[1,"word"],
       date = format(as.POSIXct(nearPoints(global$filteredWords, input$plot1_click)[1,"date"]),'%Y %B'),
-      stringsAsFactors = FALSE)
+      stringsAsFactors = FALSE) %>% 
+      htmlTableWidget(number_of_entries = c(1),rnames=F)
     
   })
   
