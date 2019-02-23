@@ -660,7 +660,8 @@ server <- function(input, output) {
        filter(country == input$country) %>% 
        filter(year == input$year) %>%
        top_n(10, tf) %>%
-       mutate(word = reorder(word, tf))
+       mutate(word = reorder(word, tf)) %>% '['(1:10,)
+       
    })
    
    output$barPlot <- renderPlot({
