@@ -18,6 +18,7 @@ library(highcharter)
 library(htmlTable)
 library(feather)
 
+
 # shiny dashboard -----------------------------------------------------------------------------
 
 options(shiny.usecairo = TRUE)
@@ -163,7 +164,16 @@ ui <- dashboardPage(
                                fgColor = "#5b92e5",
                                inputColor = "#5b92e5"
                      )
+    ),
+    hr(),
+    
+    #### Nato image ####
+    
+    sidebarPanel(
+      #render(local_logo)
+      #img(src="/Users/BHM/Documents/Degree_MSc/Year_1/Semester_2/DATAthon/datathon2019/shiny app/Logo.png", width="100%")
     )
+    
   ),
   
   #### body ####
@@ -377,6 +387,10 @@ server <- function(input, output) {
     countries = NULL
   )
   
+  #### NATO IMAGE ####
+
+
+  
   #### word plot ####
   
   pp <- eventReactive(c(input$refreshWords),{
@@ -489,7 +503,7 @@ server <- function(input, output) {
   
   output$text <- renderHtmlTableWidget({
     
-    htmlTableWidget(buttonText(),number_of_entries = c(10, 25))
+    htmlTableWidget(buttonText(),number_of_entries = c(25, 10))
     
     
     
