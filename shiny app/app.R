@@ -116,7 +116,7 @@ ui <- dashboardPage(
                        inputId = "selectedWords",
                        label = HTML('<p style="color:black;">Select Words to Plot:</p>'),
                        choices = trending_words$word,
-                       selected = "change",
+                       selected = c("challenges", "change", "global"),
                        options = pickerOptions(
                          actionsBox = TRUE,
                          size = 10,
