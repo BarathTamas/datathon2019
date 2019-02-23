@@ -279,7 +279,7 @@ ui <- dashboardPage(
                     width = 7,
                     solidHeader = TRUE,
                     
-                    withSpinner(tableOutput("click_info"))
+                    withSpinner(htmlTableWidgetOutput("click_info"))
                     
                 ),
                 
@@ -444,14 +444,15 @@ server <- function(input, output) {
   
   #### info table 1 ####
   
-  output$click_info <- renderTable({
+  output$click_info <- renderHtmlTableWidget({
     
     session_info %>%
       filter(date == as.POSIXct(nearPoints(global$filteredWords, input$plot1_click)[1,"date"])) %>% 
       mutate(date=format(as.POSIXct(date),'%Y %B')) %>% 
-      as.data.frame()
+      as.data.frame() %>% 
+      htmlTableWidget(number_of_entries = c(1))
     
-  }, options = list(searching = FALSE, paging = FALSE))
+  })
   
   #### info table 2 ####
   
