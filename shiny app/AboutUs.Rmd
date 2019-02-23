@@ -17,6 +17,6 @@ This is our creation for the 2019 Datathon competition at KU Leuven.
 
 ### About the tool
 
-Transparency is important, so we created a tool to investigate the contant of UN addresses.
+Transparency is important, so we created a tool to investigate the content of UN addresses.
 
 
