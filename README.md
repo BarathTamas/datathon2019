@@ -11,6 +11,6 @@ This is our creation for the 2019 Datathon competition at KU Leuven. It ended up
 
 Transparency is important, so we created a tool to investigate the content of UN addresses.  
 
-Be warned the Shiny app is clunky! The dataset is pretty big, and we did not really have the time to optimize things. It was also my
+Be warned the Shiny app is clunky! The dataset is pretty big (and stored in .csv :'), and we did not really have the time to optimize things. It was also my
 first time working with Shiny, and I would do many things differently today. Some of the underlying packages seem to cause some problems with the app
 in 2021, so things will have to be updated a bit.
