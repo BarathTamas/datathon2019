@@ -20,6 +20,7 @@ Beyond data cleaning I mostly worked on this part of the app. The first dashboar
 
 ### Dashboard 2
 The second dashboard was done entirely by my teammates (both he analysis and the GUI), therefore I have less insight into the inner workings of things. The high level summary is that it is a sentiment analysis, looking at the sentiment of the sentences containing country names. As such, the user can check the sentiment regarding certain countries in a given year using a dropdown menu. In addition the dash displays which countries talked about the country in the most positive/negative way, and also the top words (their number changeable by a dial) used in the context of the country (as a word cloud or bar chart). Finally, there is a time series plot showing how often the country was mentioned over the years.
+
 ![Alt text](https://github.com/BarathTamas/datathon2019/blob/master/dash2.JPG "Dash2")
 
 ## Hindsight
