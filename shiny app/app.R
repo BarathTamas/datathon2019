@@ -41,23 +41,23 @@ word_corrs_ordered <- read.csv("word_corrs_ordered.csv", header = TRUE, stringsA
 # write_feather(word_corrs_ordered, path)
 # word_corrs_ordered <- read_feather(path)
 
-session_info <- read.table("session_info.csv", header = TRUE, stringsAsFactors = FALSE)
+session_info <- read.table("session_info.csv", header = TRUE, stringsAsFactors = FALSE, row.names = 1)
 path <- "session_info.feather"
 write_feather(session_info, path)
 session_info <- read_feather(path)
 
-date_country_word <- read.table("date_country_word.csv", header = TRUE, stringsAsFactors = FALSE)
+date_country_word <- read.table("date_country_word.csv", header = TRUE, stringsAsFactors = FALSE,row.names = 1)
 path <- "date_country_word.feather"
 write_feather(date_country_word, path)
 date_country_word <- read_feather(path)
 
-country_codes <- read.table("country_codes.csv", header = TRUE, stringsAsFactors = FALSE)
+country_codes <- read.table("country_codes.csv", header = TRUE, stringsAsFactors = FALSE,row.names = 1)
 path <- "country_codes.feather"
 write_feather(country_codes, path)
 country_codes <- read_feather(path)
 
-# sentences <- read.table("sentences_filtered.csv", header = TRUE, stringsAsFactors = FALSE)
-sentences <- as.tibble(data.table::fread("sentences_filtered.csv"))
+sentences <- read.table("sentences_filtered.csv", header = TRUE, stringsAsFactors = FALSE,row.names = 1)
+#sentences <- as.tibble(data.table::fread("sentences_filtered.csv"))
 path <- "sentences.feather"
 write_feather(sentences, path)
 sentences <- read_feather(path)
@@ -537,11 +537,15 @@ server <- function(input, output) {
       mutate(totalscore = round(totalscore, 2))
     
   })
-  
+  fos=sentiment_data %>%
+    filter(year == 2015 & country == "Syria") %>%
+    select(totalscore) %>%
+    mutate(totalscore = round(totalscore, 2))
+  print(fos[1,])
   output$testInfo1 <- renderValueBox({
     valueBox(
       subtitle = paste0("is the averaged Sentiment Score of ", input$country, " in ", input$year), 
-      value = sentimentScore(),
+      value = sentimentScore()[1,],
       icon = icon("heartbeat", lib = "font-awesome"),
       color = "light-blue"
     )
